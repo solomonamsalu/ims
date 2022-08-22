@@ -9,12 +9,13 @@ class Supplier(models.Model):
     email=models.EmailField(max_length=200,unique=True)
     phone=models.CharField(max_length=20,unique=True)
     address=models.ForeignKey(Address, on_delete=models.CASCADE)
-    
+
 class Item(models.Model):
     name=models.CharField(max_length=100)
     SKU_number=models.IntegerField()
     seling_price=models.FloatField()
     cost_price=models.FloatField()
+    max_stock=models.IntegerField()
     on_hand_stock=models.IntegerField()
     reorder_point=models.IntegerField()
     Preferred_supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE)
