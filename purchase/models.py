@@ -1,9 +1,9 @@
 
 from django.db import models
-from Inventory.models import Item
-from Sales.models import SalesOrder
+from inventory.models import Item
+from sales.models import SalesOrder
 from authentication.models import Address
-from Inventory.models import Supplier
+from inventory.models import Supplier
 
 class PurchaseOrder(models.Model):
     supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE)

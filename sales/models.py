@@ -1,6 +1,6 @@
 
 from django.db import models
-from Inventory.models import Item, Store
+from inventory.models import Item, Store
 from authentication.models import Address
 
 

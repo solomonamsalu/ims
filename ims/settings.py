@@ -28,10 +28,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # my apps
     'authentication',
-    'Inventory',
-   'Sales',
-   'Purchase',
-   'Reports'
+    'inventory',
+   'sales',
+   'purchase',
+   'report'
    
 
 ]
