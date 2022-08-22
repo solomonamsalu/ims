@@ -7,11 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-        {%for item in items%}
+    {%load crispy_forms_tags%}
+    {%crispy form%}
+    <button class="btn btn-outline-info" type="submit">Submit</button>
+        <!-- {%for item in items%}
         <ul>
-            {{item.name}}
+            {{item.name}} 
+            <a href="{% url 'add_item' %}">edit</a>
         </ul>
         {% endfor %}
-    
+        <a href="{% url 'add_item' %}">ADD Item</a> -->
 </body>
 </html>
