@@ -7,13 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-        {%
-        for item in items:
+        {%for item in items%}
         <ul>
-            item.name
+            {{item.name}}
         </ul>
-        %}
-        
+        {% endfor %}
     
 </body>
 </html>
