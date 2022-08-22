@@ -1,25 +1,25 @@
 
 from django.db import models
-
+from Inventory.models import Item
+from Sales.models import SalesOrder
 from authentication.models import Address
+from Inventory.models import Supplier
 
-class Supplier(models.Model):
-    first_name=models.CharField(max_length=200)
-    last_name=models.CharField(max_length=200)
-    company_name=models.CharField(max_length=200)
-    email=models.EmailField(max_length=200,unique=True)
-    phone=models.CharField(max_length=20,unique=True)
-    address=models.CharField(max_length=200)
-    city=models.CharField(max_length=200)
-    Country=models.CharField(max_length=200)
-    posta=models.CharField(max_length=200)
-# class PurchaseOrder(models.Model):
-#     supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE)
-#     branch=models.CharField(max_length=200)
-#     deliver_to = models.ForeignKey(Address, on_delete=models.CASCADE)
-#     purchase_order_number=models.IntegerField()
-#     date=models.DateField(auto_created=True)
-    
+class PurchaseOrder(models.Model):
+    supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE)
+    branch=models.CharField(max_length=200) # FIXME fix to foreignkey
+    deliver_to = models.ForeignKey(Address, on_delete=models.CASCADE)
+    purchase_order_number=models.CharField(max_length=100)
+    date=models.DateField(auto_now_add=True)
+    items=models.ManyToManyField(Item, through='PurchaseOrderedItem')
+
+class PurchaseOrderedItem(models.Model):
+
+    purchase_order = models.ForeignKey(PurchaseOrder, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='purchase_ordered_items')
+    quantity =  models.IntegerField()
+    rate = models.FloatField() # This is selling price
+    amount = models.FloatField() # this is total cost for this item
 
     
 

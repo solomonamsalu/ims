@@ -22,7 +22,7 @@ class SalesOrder(models.Model):
 class OrderedItem(models.Model):
 
     sales_order = models.ForeignKey(SalesOrder, on_delete=models.CASCADE)
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='sales_ordered_items')
     quantity =  models.IntegerField()
     rate = models.FloatField() # This is selling price
     amount = models.FloatField() # this is total cost for this item
