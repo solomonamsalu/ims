@@ -14,7 +14,8 @@ class Supplier(models.Model):
     def __str__(self) -> str:
         return self.first_name + ' '+ self.last_name
     
-
+    def get_absolute_url(self):
+        return reverse('supplier-detail', kwargs={'pk': self.pk})
 class Item(models.Model):
     name=models.CharField(max_length=100)
     SKU_number=models.CharField(max_length=100)
