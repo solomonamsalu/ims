@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,13 +10,18 @@
 </head>
 <body>
     
-            <form class="form-horizontal" method="POST">
-                <div>
-                {% csrf_token %}
-                    {%load crispy_forms_tags%}
-                    {%crispy form%}
-                    <button class="btn btn-outline-info" type="submit">Submit</button>
-                </div>
-            </form>
+<ul>
+    <!-- Iterate over object_list -->
+    {% for object in object_list %}
+    <!-- Display Objects -->
+    <li>{{ object.name }}</li>
+    <li>{{ object.seling_price }}</li>
+   
+    <hr/>
+    <!-- If object_list is empty  -->
+    {% empty %}
+    <li>No objects yet.</li>
+    {% endfor %}
+</ul>
 </body>
 </html>

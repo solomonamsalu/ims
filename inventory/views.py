@@ -6,7 +6,7 @@ from django.views import View
 class ItemView(View):
     form_class=AddItemForm
     # initial={'key','value'}
-    template_name='list.html' 
+    template_name='add_item.html' 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
@@ -19,16 +19,24 @@ class ItemView(View):
 
         return render(request, self.template_name, {'form': form})
 
-    # def list_items(request):
+# class ListItemView(View):
 
-    #     items = Item.objects.all()
-    #     context = {
-    #         'items':items,
-    #         'form':AddItemForm()
-    #     }
+#     def get(request, *args, **kwargs):
 
-    #     return render(request, template_name='list.html', context=context)
+#         items = Item.objects.all()
+#         context = {
+#             'items': items
+#         }
+#         return render(request, 'list.html', context)
 
-def add_item(request):
 
-    return HttpResponse('ADd item here')
+from django.views.generic.list import ListView
+   
+class ListItemView(ListView):
+   
+    # specify the model for list view
+    model = Item
+    template_name = 'list.html'
+    queryset = Item.objects.all()
+   
+   
