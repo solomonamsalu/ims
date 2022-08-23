@@ -8,22 +8,21 @@ from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-
-class ItemCreateView(CreateView):
-    model = Item
-    fields = '__all__'
-    template_name = 'inventory/item_create.html'
-
-
-   
 class ItemListView(ListView):
    
     # specify the model for list view
     model = Item
     template_name = 'inventory/list.html'
     queryset = Item.objects.all()
-   
+    context_object_name = 'object_list'
+    
 
+class ItemCreateView(CreateView):
+    model = Item
+    fields = '__all__'
+    template_name = 'inventory/item_create.html'
+
+   
 class ItemDetailView(DeleteView):
       model = Item
       template_name = 'inventory/item_detail.html'
