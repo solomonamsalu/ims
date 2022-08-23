@@ -19,7 +19,7 @@ class Supplier(models.Model):
 class Item(models.Model):
     name=models.CharField(max_length=100)
     SKU_number=models.CharField(max_length=100)
-    seling_price=models.FloatField()
+    selling_price=models.FloatField()
     cost_price=models.FloatField()
     max_stock=models.IntegerField()
     on_hand_stock=models.IntegerField()
