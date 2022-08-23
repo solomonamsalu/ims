@@ -1,48 +1,70 @@
 from django.shortcuts import render
-from inventory.models import Item
+from inventory.models import Item, Supplier
 from django.http import HttpResponse
 from inventory.forms import AddItemForm,AddSupplierForm
 from django.views import View
+from django.urls import reverse_lazy
+
 from django.views.generic.list import ListView
-class ItemView(View):
-    form_class=AddItemForm
-    # initial={'key','value'}
-    template_name='add_item.html' 
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-            # <process form cleaned data>
-            return HttpResponse('/success/')
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-        return render(request, self.template_name, {'form': form})
-
-
-
-
-   
-class ListItemView(ListView):
+class ItemListView(ListView):
    
     # specify the model for list view
     model = Item
-    template_name = 'list.html'
+    template_name = 'inventory/list.html'
     queryset = Item.objects.all()
-class SupplierView(View):
-    form_class=AddSupplierForm
-    template_name='add_supplier.html'
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-            # <process form cleaned data>
-            return HttpResponse('suplier is add successfully')
+    context_object_name = 'object_list'
+    
 
+class ItemCreateView(CreateView):
+    model = Item
+    fields = '__all__'
+    template_name = 'inventory/item_create.html'
 
    
+class ItemDetailView(DeleteView):
+      model = Item
+      template_name = 'inventory/item_detail.html'
+
+class ItemUpdateView(UpdateView):
+    model = Item
+    fields = '__all__'
+    template_name: str = 'inventory/item_create.html'
+
+class ItemDeleteView(DeleteView):
+    model = Item
+    success_url = reverse_lazy('item-list')
+
+# supplier
+
+class SupplierListView(ListView):
    
+    # specify the model for list view
+    model = Supplier
+    # template_name = 'inventory/supplier_list.html'
+    queryset = Supplier.objects.all()
+    # context_object_name = 'object_list'
+    
+
+class SupplierCreateView(CreateView):
+    model = Supplier
+    fields = '__all__'
+    template_name = 'inventory/supplier_create.html'
+
+   
+class SupplierDetailView(DeleteView):
+      model = Supplier
+      template_name = 'inventory/supplier_detail.html'
+
+class SupplierUpdateView(UpdateView):
+    model = Supplier
+    fields = '__all__'
+    template_name: str = 'inventory/supplier_create.html'
+
+class SupplierDeleteView(DeleteView):
+    model = Supplier
+    success_url = reverse_lazy('supplier-list')
+
+
+
