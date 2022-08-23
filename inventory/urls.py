@@ -5,6 +5,6 @@ from django.urls import path
 from inventory import views
 
 urlpatterns = [
-    path('items/', views.list_items), 
+    path('items/', views.ItemView.as_view()), 
     path('items/add/', views.add_item, name='add_item'),
 ]

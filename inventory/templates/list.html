@@ -7,15 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    {%load crispy_forms_tags%}
-    {%crispy form%}
-    <button class="btn btn-outline-info" type="submit">Submit</button>
-        <!-- {%for item in items%}
-        <ul>
-            {{item.name}} 
-            <a href="{% url 'add_item' %}">edit</a>
-        </ul>
-        {% endfor %}
-        <a href="{% url 'add_item' %}">ADD Item</a> -->
+    
+            <form class="form-horizontal" method="POST">
+                <div>
+                {% csrf_token %}
+                    {%load crispy_forms_tags%}
+                    {%crispy form%}
+                    <button class="btn btn-outline-info" type="submit">Submit</button>
+                </div>
+            </form>
 </body>
 </html>
