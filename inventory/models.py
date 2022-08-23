@@ -1,5 +1,6 @@
 from tkinter import CASCADE
 from django.db import models
+from django.urls import reverse
 
 from authentication.models import Address
 class Supplier(models.Model):
@@ -12,6 +13,7 @@ class Supplier(models.Model):
 
     def __str__(self) -> str:
         return self.first_name + ' '+ self.last_name
+    
 
 class Item(models.Model):
     name=models.CharField(max_length=100)
@@ -25,6 +27,8 @@ class Item(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    def get_absolute_url(self):
+        return reverse('item-detail', kwargs={'pk': self.pk})
     
 class Store(models.Model):
 

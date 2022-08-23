@@ -3,40 +3,36 @@ from inventory.models import Item
 from django.http import HttpResponse
 from inventory.forms import AddItemForm
 from django.views import View
-class ItemView(View):
-    form_class=AddItemForm
-    # initial={'key','value'}
-    template_name='inventory/add_item.html' 
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-            # <process form cleaned data>
-            return HttpResponse('/success/')
-
-        return render(request, self.template_name, {'form': form})
-
-# class ListItemView(View):
-
-#     def get(request, *args, **kwargs):
-
-#         items = Item.objects.all()
-#         context = {
-#             'items': items
-#         }
-#         return render(request, 'list.html', context)
-
+from django.urls import reverse_lazy
 
 from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
+
+class ItemCreateView(CreateView):
+    model = Item
+    fields = '__all__'
+    template_name = 'inventory/item_create.html'
+
+
    
-class ListItemView(ListView):
+class ItemListView(ListView):
    
     # specify the model for list view
     model = Item
     template_name = 'inventory/list.html'
     queryset = Item.objects.all()
    
-   
+
+class ItemDetailView(DeleteView):
+      model = Item
+      template_name = 'inventory/item_detail.html'
+
+class ItemUpdateView(UpdateView):
+    model = Item
+    fields = '__all__'
+    template_name: str = 'inventory/item_create.html'
+
+class ItemDeleteView(DeleteView):
+    model = Item
+    success_url = reverse_lazy('item-list')
