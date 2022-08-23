@@ -10,6 +10,9 @@ class Supplier(models.Model):
     phone=models.CharField(max_length=20,unique=True)
     address=models.ForeignKey(Address, on_delete=models.CASCADE)
 
+    def __str__(self) -> str:
+        return self.first_name + ' '+ self.last_name
+
 class Item(models.Model):
     name=models.CharField(max_length=100)
     SKU_number=models.CharField(max_length=100)
@@ -19,12 +22,17 @@ class Item(models.Model):
     on_hand_stock=models.IntegerField()
     reorder_point=models.IntegerField()
     Preferred_supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return self.name
     
 class Store(models.Model):
 
     store_number = models.CharField(max_length=255)
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
 
+    def __str__(self) -> str:
+        return 'Store: ' + self.store_number
 
 
     

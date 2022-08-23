@@ -6,7 +6,7 @@ from django.views import View
 class ItemView(View):
     form_class=AddItemForm
     # initial={'key','value'}
-    template_name='add_item.html' 
+    template_name='inventory/add_item.html' 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         return render(request, self.template_name, {'form': form})
@@ -36,7 +36,7 @@ class ListItemView(ListView):
    
     # specify the model for list view
     model = Item
-    template_name = 'list.html'
+    template_name = 'inventory/list.html'
     queryset = Item.objects.all()
    
    
