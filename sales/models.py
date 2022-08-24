@@ -34,6 +34,6 @@ class SalesOrder(models.Model):
     def clean(self):
         if self.item.on_hand_stock < self.quantity:
 
-            raise ValidationError({"quantity": "You are trying to order beyond the available stock!"})
+            raise ValidationError({"quantity": f"You are trying to order beyond the available stock! Maximum you can order is {self.item.on_hand_stock}"})
 
 

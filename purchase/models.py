@@ -3,7 +3,6 @@ from authentication.models import Address
 from django.core.exceptions import ValidationError
 from django.db import models
 from inventory.models import Item, Supplier
-from sales.models import SalesOrder
 
 
 class PurchaseOrder(models.Model):
@@ -26,7 +25,9 @@ class PurchaseOrder(models.Model):
 
     def clean(self):
         if self.item.on_hand_stock + self.quantity > self.item.max_stock:
-            raise ValidationError({"quantity": "You are trying to purchase beyond the maximum stock!"})
+            max_order = self.item.max_stock - self.item.on_hand_stock
+            raise ValidationError({"quantity": f"You are trying to purchase beyond the maximum stock! The maximum you can order is {max_order}"})
         elif self.item.on_hand_stock + self.quantity < self.item.reorder_point:
-            raise ValidationError({"quantity": "The stock will not go above the reorder point in this case!"})
+            min_order = self.item.reorder_point - self.item.on_hand_stock
+            raise ValidationError({"quantity": f"The stock will not go above the reorder point in this case! The minimum you can order is {min_order}"})
 
