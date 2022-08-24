@@ -1,7 +1,8 @@
 
+from authentication.models import Address
+from django.core.exceptions import ValidationError
 from django.db import models
 from inventory.models import Item, Store
-from authentication.models import Address
 
 
 class Customer(models.Model):
@@ -30,6 +31,9 @@ class SalesOrder(models.Model):
     def __str__(self) -> str:
         return self.sales_order_number
 
+    def clean(self):
+        if self.item.on_hand_stock < self.quantity:
 
+            raise ValidationError({"quantity": "You are trying to order beyond the available stock!"})
 
 

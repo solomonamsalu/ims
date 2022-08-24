@@ -1,9 +1,10 @@
 
-from django.db import models
-from inventory.models import Item
-from sales.models import SalesOrder
 from authentication.models import Address
-from inventory.models import Supplier
+from django.core.exceptions import ValidationError
+from django.db import models
+from inventory.models import Item, Supplier
+from sales.models import SalesOrder
+
 
 class PurchaseOrder(models.Model):
     supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE)
@@ -20,4 +21,11 @@ class PurchaseOrder(models.Model):
         self.amount = self.quantity*self.rate
         return super().save(*args, **kwargs)
 
+    def __str__(self) -> str:
+        return self.purchase_order_number
+
+    def clean(self):
+        if self.item.on_hand_stock + self.quantity > self.item.max_stock:
+
+            raise ValidationError({"quantity": "You are trying to purchase beyond the maximum stock!"})
 
