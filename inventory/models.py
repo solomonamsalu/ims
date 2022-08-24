@@ -25,6 +25,7 @@ class Item(models.Model):
     on_hand_stock=models.IntegerField()
     reorder_point=models.IntegerField()
     Preferred_supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE)
+    enough = models.BooleanField(default=True)
 
     def __str__(self) -> str:
         return self.name
