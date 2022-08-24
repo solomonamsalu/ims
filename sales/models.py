@@ -20,7 +20,7 @@ class SalesOrder(models.Model):
     item=models.ForeignKey(Item, on_delete= models.CASCADE)
     quantity = models.IntegerField()
     rate = models.FloatField()
-    amount = models.FloatField()
+    amount = models.FloatField(null=True, blank=True)
     
     def save(self, *args, **kwargs):
         self.amount = self.quantity*self.rate
