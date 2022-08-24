@@ -26,6 +26,7 @@ class PurchaseOrder(models.Model):
 
     def clean(self):
         if self.item.on_hand_stock + self.quantity > self.item.max_stock:
-
             raise ValidationError({"quantity": "You are trying to purchase beyond the maximum stock!"})
+        elif self.item.on_hand_stock + self.quantity < self.item.reorder_point:
+            raise ValidationError({"quantity": "The stock will not go above the reorder point in this case!"})
 
