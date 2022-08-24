@@ -9,11 +9,11 @@ from sales.models import SalesOrder
 from inventory.models import Item
 
 @receiver(post_save, sender=SalesOrder)
-def order_done(sender, instance, **kwargs):
+def sales_order_done(sender, instance, **kwargs):
     ''' Create sign off and send email to those who have to sign.'''
     sales_order = instance
     item = sales_order.item
     item.on_hand_stock -= sales_order.quantity
-    post_save.disconnect(order_done, sender=sender)
+    post_save.disconnect(sales_order_done, sender=sender)
     item.save()
-    post_save.connect(order_done, sender=sender)
+    post_save.connect(sales_order_done, sender=sender)
