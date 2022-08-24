@@ -1,3 +1,8 @@
 from django.contrib import admin
-
-# Register your models here.
+from sales.models import Customer,SalesOrder
+class CustomerAdmin(admin.ModelAdmin):
+    list_display=[field.name for field in Customer._meta.fields]
+class SalesOrderAdmin(admin.ModelAdmin):
+    list_display=[field.name for field in SalesOrder._meta.fields]
+admin.site.register(Customer,CustomerAdmin)
+admin.site.register(SalesOrder,SalesOrderAdmin)

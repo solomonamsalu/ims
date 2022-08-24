@@ -10,6 +10,8 @@ class Customer(models.Model):
     email=models.EmailField(max_length=200,unique=True)
     phone=models.CharField(max_length=20,unique=True)
     address=models.ForeignKey(Address, on_delete=models.CASCADE)
+    def __str__(self) -> str:
+        return self.first_name +','+self.last_name
    
 class SalesOrder(models.Model):
 
@@ -25,6 +27,8 @@ class SalesOrder(models.Model):
     def save(self, *args, **kwargs):
         self.amount = self.quantity*self.rate
         return super().save(*args, **kwargs)
+    def __str__(self) -> str:
+        return self.sales_order_number
 
 
 
