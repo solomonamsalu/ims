@@ -17,15 +17,14 @@ class SalesOrder(models.Model):
     branch=models.ForeignKey(Store,on_delete=models.CASCADE)
     sales_order_number=models.CharField(max_length=100)
     sales_order_date=models.DateTimeField(auto_now_add=True)
-    items=models.ManyToManyField(Item, through='OrderedItem')
-
-class OrderedItem(models.Model):
-
-    sales_order = models.ForeignKey(SalesOrder, on_delete=models.CASCADE)
-    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='sales_ordered_items')
-    quantity =  models.IntegerField()
-    rate = models.FloatField() # This is selling price
-    amount = models.FloatField() # this is total cost for this item
+    item=models.ForeignKey(Item, on_delete= models.CASCADE)
+    quantity = models.IntegerField()
+    rate = models.FloatField()
+    amount = models.FloatField()
+    
+    def save(self, *args, **kwargs):
+        self.amount = self.quantity*self.rate
+        return super().save(*args, **kwargs)
 
 
 
