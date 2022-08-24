@@ -11,15 +11,13 @@ class PurchaseOrder(models.Model):
     deliver_to = models.ForeignKey(Address, on_delete=models.CASCADE)
     purchase_order_number=models.CharField(max_length=100)
     date=models.DateField(auto_now_add=True)
-    items=models.ManyToManyField(Item, through='PurchaseOrderedItem')
-
-class PurchaseOrderedItem(models.Model):
-
-    purchase_order = models.ForeignKey(PurchaseOrder, on_delete=models.CASCADE)
-    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='purchase_ordered_items')
-    quantity =  models.IntegerField()
-    rate = models.FloatField() # This is selling price
-    amount = models.FloatField() # this is total cost for this item
-
+    item=models.ForeignKey(Item, on_delete= models.CASCADE)
+    quantity = models.IntegerField()
+    rate = models.FloatField()
+    amount = models.FloatField()
     
+    def save(self, *args, **kwargs):
+        self.amount = self.quantity*self.rate
+        return super().save(*args, **kwargs)
+
 
