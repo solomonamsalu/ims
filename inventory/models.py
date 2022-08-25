@@ -1,8 +1,21 @@
 from tkinter import CASCADE
+
+from authentication.models import Address
+from core.models import Company
 from django.db import models
 from django.urls import reverse
 
-from authentication.models import Address
+
+class Store(models.Model):
+
+    store_number = models.CharField(max_length=255)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    # password = models.
+
+    def __str__(self) -> str:
+        return 'Store: ' + self.store_number
+
 class Supplier(models.Model):
     first_name=models.CharField(max_length=200)
     last_name=models.CharField(max_length=200)
@@ -18,6 +31,7 @@ class Supplier(models.Model):
         return reverse('supplier-detail', kwargs={'pk': self.pk})
 class Item(models.Model):
     name=models.CharField(max_length=100)
+    # store = models.ForeignKey(Store, on_delete=models.CASCADE)
     SKU_number=models.CharField(max_length=100)
     selling_price=models.FloatField()
     cost_price=models.FloatField()
@@ -32,13 +46,4 @@ class Item(models.Model):
     def get_absolute_url(self):
         return reverse('item-detail', kwargs={'pk': self.pk})
     
-class Store(models.Model):
 
-    store_number = models.CharField(max_length=255)
-    address = models.ForeignKey(Address, on_delete=models.CASCADE)
-
-    def __str__(self) -> str:
-        return 'Store: ' + self.store_number
-
-
-    
