@@ -1,6 +1,6 @@
 from tkinter import CASCADE
 
-from authentication.models import Address
+from core.models import Address
 from core.models import Company
 from django.db import models
 from django.urls import reverse
@@ -31,7 +31,7 @@ class Supplier(models.Model):
         return reverse('supplier-detail', kwargs={'pk': self.pk})
 class Item(models.Model):
     name=models.CharField(max_length=100)
-    # store = models.ForeignKey(Store, on_delete=models.CASCADE)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE)
     SKU_number=models.CharField(max_length=100)
     selling_price=models.FloatField()
     cost_price=models.FloatField()

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from sales.models import Customer,SalesOrder
 class CustomerAdmin(admin.ModelAdmin):
+    
     list_display=[field.name for field in Customer._meta.fields]
 class SalesOrderAdmin(admin.ModelAdmin):
     list_display=[field.name for field in SalesOrder._meta.fields]

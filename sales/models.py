@@ -1,5 +1,5 @@
 
-from authentication.models import Address
+from core.models import Address
 from django.core.exceptions import ValidationError
 from django.db import models
 from inventory.models import Item, Store

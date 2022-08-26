@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     # my apps
-    'authentication',
     'inventory',
    'sales',
    'purchase',
@@ -121,3 +120,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+# authentication
+AUTH_USER_MODEL = 'core.User'
