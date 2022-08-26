@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    email = models.EmailField(unique=True)
+    email = models.EmailField(null=True, blank=True)
 class Company(models.Model):
 
     name = models.CharField(max_length=100)
