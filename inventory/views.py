@@ -80,3 +80,6 @@ class SupplierDeleteView(DeleteView):
 
 
 
+def home(request):
+
+    return render(request, 'layouts/base.html')
