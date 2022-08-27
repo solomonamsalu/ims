@@ -35,5 +35,5 @@ class Store(models.Model):
 class User(AbstractUser):
     email = models.EmailField(null=True, blank=True)
 
-    store = models.ForeignKey(Store, on_delete=models.CASCADE)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, null=True, blank=True)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
