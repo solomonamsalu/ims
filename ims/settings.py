@@ -160,3 +160,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SITE_ID=1 
+
+# customize all auth
+
+ACCOUNT_FORMS = {
+'signup': 'ims.forms.CustomSignupForm',
+'login': 'ims.forms.CustomLoginForm',
+}
