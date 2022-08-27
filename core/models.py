@@ -30,6 +30,8 @@ class Store(models.Model):
     def __str__(self) -> str:
         return 'Store: ' + self.store_number
 
+    def get_absolute_url(self):
+        return reverse('store-detail', kwargs={'pk': self.pk})
 class User(AbstractUser):
     email = models.EmailField(null=True, blank=True)
 

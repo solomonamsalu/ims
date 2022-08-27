@@ -13,8 +13,8 @@ urlpatterns = [
 
     # supplier
     # path('suppliers/', views.SupplierListView.as_view(), name='supplier-list'),
-    # path('suppliers/add/', views.SupplierCreateView.as_view(), name='supplier-create'), 
-    # path('suppliers/detail/<pk>/', views.SupplierDetailView.as_view() , name='supplier-detail'),
+    path('store/add/', views.StoreCreateView.as_view(), name='store-create'), 
+    path('store/detail/<pk>/', views.StoreDetailView.as_view() , name='store-detail'),
     # path('suppliers/update/<pk>/', views.SupplierUpdateView.as_view() , name='supplier-update'),
     # path('suppliers/delete/<pk>/', views.SupplierDeleteView.as_view() , name='supplier-delete'),
 ]
