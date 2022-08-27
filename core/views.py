@@ -2,9 +2,11 @@ from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.views.generic import CreateView, DeleteView, DetailView
+from django.utils.decorators import method_decorator
+from django.views.generic import CreateView, DeleteView, DetailView, ListView
 
 from core.models import Company, Store
+from inventory.models import Item
 
 
 @login_required(login_url="/accounts/login/")
@@ -15,6 +17,19 @@ def home(request):
 def profile(request):
     
     return render(request, 'home/profile.html')
+
+
+@method_decorator(login_required, name='dispatch')
+class CompanyListView(ListView):
+   
+    # specify the model for list view
+    model = Company
+    template_name = 'core/company_list.html'
+    # queryset = Item.objects.all()
+    context_object_name = 'object_list'
+    
+    def get_queryset(self):
+        return Company.objects.filter() # TODO filter the companies
 
 class CompanyCreateView(CreateView):
     model = Company
