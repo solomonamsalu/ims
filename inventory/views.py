@@ -1,13 +1,16 @@
+from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
+
 from inventory.forms import AddItemForm
 from inventory.models import Item, Supplier
 
-
+@method_decorator(login_required, name='dispatch')
 class ItemListView(ListView):
    
     # specify the model for list view
