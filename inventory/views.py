@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.http.response import HttpResponseRedirect
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic import DetailView
 from django.urls import reverse
 class ItemListView(ListView):
    
@@ -35,7 +36,7 @@ class ItemCreateView(CreateView):
             
         return self.form_invalid(form)
            
-class ItemDetailView(DeleteView):
+class ItemDetailView(DetailView):
       model = Item
       template_name = 'inventory/item_detail.html'
 

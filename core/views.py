@@ -1,3 +1,18 @@
 from django.shortcuts import render
 
-# Create your views here.
+from core.models import Company
+from django.views.generic import CreateView, DeleteView, DetailView
+from django.http.response import HttpResponseRedirect
+from django.urls import reverse
+
+class CompanyCreateView(CreateView):
+    model = Company
+    # form_class = AddCompanyForm
+    fields = '__all__'
+    template_name = 'core/company_create.html'
+
+    
+class CompanyDetailView(DetailView):
+      model = Company
+      template_name = 'core/company_detail.html'
+
