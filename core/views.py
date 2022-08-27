@@ -3,7 +3,7 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DeleteView, DetailView, ListView
+from django.views.generic import CreateView, DeleteView, DetailView, ListView,UpdateView
 
 from core.models import Company, Store
 from inventory.models import Item
@@ -41,6 +41,10 @@ class CompanyCreateView(CreateView):
 class CompanyDetailView(DetailView):
       model = Company
       template_name = 'core/company_detail.html'
+class CompanyUpdateView(UpdateView):
+    model = Company
+    fields = '__all__'
+    template_name = 'core/company_create.html'
 
 class StoreCreateView(CreateView):
     model = Store
