@@ -1,14 +1,17 @@
-from django.shortcuts import render
-from inventory.models import Item, Supplier
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from inventory.forms import AddItemForm,AddSupplierForm
-from django.views import View
-from django.urls import reverse_lazy
 from django.http.response import HttpResponseRedirect
-from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.shortcuts import render
+from django.urls import reverse, reverse_lazy
+from django.views import View
 from django.views.generic import DetailView
-from django.urls import reverse
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.list import ListView
+
+from inventory.forms import AddItemForm, AddSupplierForm
+from inventory.models import Item, Supplier
+
+
 class ItemListView(ListView):
    
     # specify the model for list view
@@ -80,7 +83,7 @@ class SupplierDeleteView(DeleteView):
     success_url = reverse_lazy('supplier-list')
 
 
-
+@login_required(login_url="/accounts/login/")
 def home(request):
 
     return render(request, 'layouts/base.html')
