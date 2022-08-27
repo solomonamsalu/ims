@@ -71,6 +71,7 @@ class SupplierCreateView(CreateView):
 class SupplierDetailView(DeleteView):
       model = Supplier
       template_name = 'inventory/supplier_detail.html'
+      context_object_name = 'object'
 
 class SupplierUpdateView(UpdateView):
     model = Supplier

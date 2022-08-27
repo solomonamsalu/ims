@@ -1,16 +1,28 @@
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div>{{object.first_name}}</div>
-    <div>{{object.last_name}}</div>
-    
-</body>
-</html>
+{% include "layouts/base.html" %}
+{% block content %}
+<div class="container" >
+<table class="table">
+            <tr>
+              <th>first_name</th>
+              <th>last_name</th>
+              <th>company_name</th>
+              <th>emali</th>
+              <th>phone</th>
+              <th>address</th>
+              
+            </tr>
+        
+            <tr>
+              <td>{{ object.first_name }}</td>
+              <td>{{ object.last_name}}</td> 
+              <td>{{ object.company_name}}</td>
+              <td>{{ object.email}}</td>
+              <td>{{ object.phone}}</td> 
+              <td>{{ object.address}}</td>     
+              <td>
+                <a href="{% url 'supplier-update' pk=object.id %}"><button >Edit</button></a>
+              </td>
+            </tr>
+         </table>{% endblock content %}
