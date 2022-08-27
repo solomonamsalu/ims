@@ -3,7 +3,7 @@
 from django.contrib import admin
 from django.urls import path
 from core import views
-
+from allauth import utils
 urlpatterns = [
     path('companies/', views.CompanyListView.as_view(), name='company-list'),
     path('company/add/', views.CompanyCreateView.as_view(), name='company-create'), 

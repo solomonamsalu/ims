@@ -1,6 +1,7 @@
 
 
-from allauth.account.forms import SignupForm, LoginForm
+from allauth import app_settings
+from allauth.account.forms import LoginForm, SignupForm
 from django import forms
 
 
@@ -19,5 +20,5 @@ class CustomSignupForm(SignupForm):
 class CustomLoginForm(LoginForm):
     
     store_number = forms.CharField(max_length=100)
- 
+    fields = ['user_name', 'store', 'password']
     
