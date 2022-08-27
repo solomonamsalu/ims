@@ -4,25 +4,37 @@ from django.http import HttpResponse
 from inventory.forms import AddItemForm,AddSupplierForm
 from django.views import View
 from django.urls import reverse_lazy
-
+from django.http.response import HttpResponseRedirect
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-
+from django.urls import reverse
 class ItemListView(ListView):
    
     # specify the model for list view
     model = Item
     template_name = 'inventory/list.html'
-    queryset = Item.objects.all()
+    # queryset = Item.objects.all()
     context_object_name = 'object_list'
     
+    def get_queryset(self):
+        return Item.objects.filter(store= self.request.user.store)
 
 class ItemCreateView(CreateView):
     model = Item
-    fields = '__all__'
+    form_class = AddItemForm
     template_name = 'inventory/item_create.html'
 
-   
+    def post(self,request, *args, **kwargs):
+        form = self.form_class(self.request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.store = self.request.user.store
+            obj.save()
+            success_url = reverse('item-detail', kwargs={'pk': obj.id})
+            return HttpResponseRedirect(success_url)
+            
+        return self.form_invalid(form)
+           
 class ItemDetailView(DeleteView):
       model = Item
       template_name = 'inventory/item_detail.html'
