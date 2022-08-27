@@ -1,9 +1,20 @@
+from django.contrib.auth.decorators import login_required
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
+from django.views.generic import CreateView, DeleteView, DetailView
 
 from core.models import Company, Store
-from django.views.generic import CreateView, DeleteView, DetailView
-from django.http.response import HttpResponseRedirect
-from django.urls import reverse
+
+
+@login_required(login_url="/accounts/login/")
+def home(request):
+
+    return render(request, 'layouts/base.html')
+
+def profile(request):
+    
+    return render(request, 'home/profile.html')
 
 class CompanyCreateView(CreateView):
     model = Company

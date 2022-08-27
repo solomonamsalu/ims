@@ -1,14 +1,10 @@
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
-from django.views import View
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
-
-from inventory.forms import AddItemForm, AddSupplierForm
+from inventory.forms import AddItemForm
 from inventory.models import Item, Supplier
 
 
@@ -83,7 +79,3 @@ class SupplierDeleteView(DeleteView):
     success_url = reverse_lazy('supplier-list')
 
 
-@login_required(login_url="/accounts/login/")
-def home(request):
-
-    return render(request, 'layouts/base.html')

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from inventory import views
+from core import views
 from allauth.account import urls
 
 urlpatterns = [
@@ -23,6 +23,7 @@ urlpatterns = [
     path('inventory/', include('inventory.urls')),
     path('core/', include('core.urls')),
     path('', views.home),
+    path('profile', views.profile, name='profile'),
     path('accounts/', include('allauth.urls')),
 
 ]
