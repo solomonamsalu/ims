@@ -1,16 +1,42 @@
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
     <div>{{object.name}}</div>
     <div>{{object.seling_price}}</div>
     
 </body>
-</html>
+</html>{% include "layouts/base.html" %}
+{% block content %}
+<div class="container" >
+<table class="table">
+            <tr>
+              <th>name</th>
+              <th>store</th>
+              <th>SKU_number</th>
+              <th>selling_price</th>
+              <th>cost_price</th>
+              <th>max_stock</th>
+              <th>on_hand_stock</th>
+              <th>reorder_point</th>
+              <th>Preferred_supplier</th>
+              <th> enough</th>
+
+              
+            </tr>
+        
+            <tr>
+              <td>{{ object.name }}</td>
+              <td>{{ object.store}}</td> 
+              <td>{{ object.SKU_number}}</td>
+              <td>{{ object.selling_price}}</td>
+              <td>{{ object.cost_price}}</td> 
+              <td>{{ object.max_stock}}</td>
+              <td>object.on_hand_stock</td>
+              <td>object.reorder_point</td>
+              <td>object.Preferred_supplier</td>
+              <td> object.enough</td>
+
+              <td>
+                <a href="{% url 'item-update' pk=object.id %}"><button >Edit</button></a>
+              </td>
+            </tr>
+         </table>{% endblock content %}
