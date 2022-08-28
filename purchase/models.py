@@ -1,11 +1,12 @@
 
-from core.models import Address
+from core.models import Address, Store
 from django.core.exceptions import ValidationError
 from django.db import models
 from inventory.models import Item, Supplier
 
 
 class PurchaseOrder(models.Model):
+    store = models.ForeignKey(Store, on_delete=models.CASCADE)
     supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE)
     branch=models.CharField(max_length=200) # FIXME fix to foreignkey
     deliver_to = models.ForeignKey(Address, on_delete=models.CASCADE)

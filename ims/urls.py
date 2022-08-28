@@ -25,5 +25,6 @@ urlpatterns = [
     path('', views.home),
     path('profile', views.profile, name='profile'),
     path('accounts/', include('allauth.urls')),
+    path('purchase/', include('purchase.urls')),
 
 ]
