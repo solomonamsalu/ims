@@ -68,8 +68,21 @@ class CompanyUpdateView(UpdateView):
 class StoreCreateView(CreateView):
     model = Store
     # form_class = AddStoreForm
-    fields = '__all__'
+    fields = ['store_number', 'address']
     template_name = 'core/store_create.html'
+
+    def post(self,request, *args, **kwargs):
+
+        form = self.get_form_class()(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            # make the comany the company of the current user
+            obj.company = self.request.user.company
+            obj.save()
+            success_url = reverse('company-detail', kwargs={'pk': obj.id})
+            return HttpResponseRedirect(success_url)
+            
+        return self.form_invalid(form)
 
     
 class StoreDetailView(DetailView):

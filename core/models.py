@@ -27,7 +27,7 @@ class Address(models.Model):
 class Store(models.Model):
 
     store_number = models.CharField(max_length=255)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
