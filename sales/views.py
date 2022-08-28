@@ -30,7 +30,7 @@ class SalesOrderCreateView(CreateView):
            
 class SalesOrderDetailView(DetailView):
       model = SalesOrder
-      template_name = 'SalesOrder_detail.html'
+      template_name = 'sales_order_detail.html'
 
 class SalesOrderUpdateView(UpdateView):
     model = SalesOrder
