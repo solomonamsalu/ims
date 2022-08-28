@@ -21,4 +21,13 @@ class CustomLoginForm(LoginForm):
     
     store_number = forms.CharField(max_length=100)
     fields = ['user_name', 'store', 'password']
+
+    def login(self, *args, **kwargs):
+
+        # Add your own processing here.
+
+        # You must return the original result.
+        return super(CustomLoginForm, self).login(*args, **kwargs)
+
+
     
