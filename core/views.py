@@ -30,7 +30,11 @@ class CompanyListView(ListView):
     
     def get_queryset(self):
         
-        return self.request.user.company # TODO filter the companies
+        company = self.request.user.company
+        if company:
+            return company
+        else:
+            return None
 
 class CompanyCreateView(CreateView):
     model = Company

@@ -16,6 +16,7 @@ class CustomSignupForm(SignupForm):
     company_owner = forms.BooleanField(initial=False, required=False)
  
     def save(self, request):
+        
         user = super(CustomSignupForm, self).save(request)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
@@ -31,7 +32,7 @@ class CustomLoginForm(LoginForm):
 
     def login(self, *args, **kwargs):
         form = CustomLoginForm(self.request.POST)
-        store_number = CustomLoginForm(self.request.POST).data['store_number']
+        store_number =form.data['store_number']
         
         if self.user.store.store_number != store_number and self.user.company_owner == False:
             return redirect('account_login')

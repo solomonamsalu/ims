@@ -2,17 +2,18 @@
 {% include "layouts/base.html" %}
 {% block content %}
 <div class="container" >
-<table class="table">
-            <tr>
-              <th>name</th>
-            </tr>
-            <tr>
-              <td>{{ object.name }}</td> 
-              <td>
-                <a href="{% url 'company-update' pk=object.id %}"><button >Edit</button></a>
-              </td>
-            </tr>
-         </table>
+        
+  {% if object %}
+      {{ object.name }}
+        <a href="{% url 'company-update' pk=object.id %}"><button >Edit</button></a>
+  {% else %}
+  <div class="container">
+    <a href="{% url 'company-create' %}">
+      <button>Add Company</button>
+    </a>
+  </div>
+  {% endif %}
+
     </div>
     {% endblock content %}
   
