@@ -1,0 +1,29 @@
+{% include "layouts/base.html" %}
+{% block content %}
+<div class="container" >
+<table class="table">
+            <tr>
+              <th>purchase_order_number</th>
+              <th>quantity</th>
+              
+            </tr>
+        
+            {% for object in object_list %}
+            <tr>
+              <td>{{ object.purchase_order_number }}</td>
+              <td>{{ object.quantity}}</td>   
+              <td>
+                <a href="{% url 'purchaseorder-update' pk=object.id %}"><button >Edit</button></a>
+              </td>
+            </tr>
+            {% endfor %}
+         </table>
+
+        <div class="container">
+            <a href="{% url 'supplier-create' %}">
+              <button>Add supplier</button>
+            </a>
+          </div>
+    </div>
+    {% endblock content %}
+  
