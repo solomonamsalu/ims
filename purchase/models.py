@@ -3,7 +3,7 @@ from core.models import Address, Store
 from django.core.exceptions import ValidationError
 from django.db import models
 from inventory.models import Item, Supplier
-
+from django.urls import reverse
 
 class PurchaseOrder(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
@@ -32,3 +32,5 @@ class PurchaseOrder(models.Model):
             min_order = self.item.reorder_point - self.item.on_hand_stock
             raise ValidationError({"quantity": f"The stock will not go above the reorder point in this case! The minimum you can order is {min_order}"})
 
+    def get_absolute_url(self):
+        return reverse('purchaseorder-detail', kwargs={'pk': self.pk})

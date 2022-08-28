@@ -25,22 +25,14 @@ class PurchaseOrderistView(ListView):
 
 class PurchaseOrderCreateView(CreateView):
     model = PurchaseOrder
-    template_name = 'purchase/item_create.html'
+    fields = '__all__'
+    template_name = 'purchase/purchaseorder_create.html'
 
-    def post(self,request, *args, **kwargs):
-        form = self.form_class(self.request.POST)
-        if form.is_valid():
-            obj = form.save(commit=False)
-            obj.store = self.request.user.store
-            obj.save()
-            success_url = reverse('item-detail', kwargs={'pk': obj.id})
-            return HttpResponseRedirect(success_url)
-            
-        return self.form_invalid(form)
+   
            
 class PurchaseOrderDetailView(DetailView):
       model = PurchaseOrder
-      template_name = 'purchase/item_detail.html'
+      template_name = 'purchase/purchaseorder_detail.html'
 
 class PurchaseOrderUpdateView(UpdateView):
     model = PurchaseOrder

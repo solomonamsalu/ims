@@ -28,7 +28,7 @@
               <td>{{ object.rate}}</td> 
               <td>{{ object.amount}}</td>   
               <td>
-                <a href="{% url 'purchase-order-update' pk=object.id %}"><button >Edit</button></a>
+                <a href="{% url 'purchaseorder-update' pk=object.id %}"><button >Edit</button></a>
               </td>
             </tr>
          </table>{% endblock content %}
