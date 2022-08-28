@@ -24,18 +24,18 @@ class SalesOrderListView(ListView):
 class SalesOrderCreateView(CreateView):
     model = SalesOrder
     fields = '__all__'
-    template_name = 'purchase/SalesOrder_create.html'
+    template_name = 'sales_order_create.html'
 
    
            
 class SalesOrderDetailView(DetailView):
       model = SalesOrder
-      template_name = 'purchase/SalesOrder_detail.html'
+      template_name = 'SalesOrder_detail.html'
 
 class SalesOrderUpdateView(UpdateView):
     model = SalesOrder
     fields = '__all__'
-    template_name: str = 'purchase/item_create.html'
+    template_name: str = 'item_create.html'
 
 class SalesOrderDeleteView(DeleteView):
     model = SalesOrder
