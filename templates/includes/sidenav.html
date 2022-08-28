@@ -34,17 +34,26 @@
               <i class="ni ni-planet text-orange"></i>
               <span class="nav-link-text">Company</span>
             </a>
+          </li>
             <li class="nav-item">
               <a class="nav-link {% if 'icons' in segment %} active {% endif %}" href="{% url 'store-list' %}">
                 <i class="ni ni-planet text-orange"></i>
                 <span class="nav-link-text">Store</span>
               </a>
-            </a>
+            </li>
+           
             <li class="nav-item">
               <a class="nav-link {% if 'icons' in segment %} active {% endif %}" href="{% url 'purchaseorder-list' %}">
                 <i class="ni ni-planet text-orange"></i>
                 <span class="nav-link-text">Purchase_order</span>
               </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if 'map' in segment %} active {% endif %}" href="{% url 'salesorder-list' %}">
+                <i class="ni ni-pin-3 text-primary"></i>
+                <span class="nav-link-text">Salesorder</span>
+              </a>
+            </li>
         </ul>
       </div>
     </div>
