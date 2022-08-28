@@ -18,7 +18,7 @@
               <td>{{ object.name }}</td>
               <td>{{ object.selling_price }}</td>   
               <td>
-                <a href="{% url 'item-update' pk=object.id %}"><button >Edit</button></a>
+                <a href="{% url 'item-update' pk=object.id %}"><button class="btn btn-success">Edit</button></a>
               </td>
             </tr>
             {% endfor %}
@@ -26,7 +26,7 @@
 
         <div class="container">
             <a href="{% url 'item-create' %}">
-              <button>Add Item</button>
+              <button class="btn btn-danger">Add Item</button>
             </a>
           </div>
     </div>
