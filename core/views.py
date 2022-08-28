@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DeleteView, DetailView, ListView,UpdateView
+from requests import request
 
 from core.models import Company, Store
 from inventory.models import Item
@@ -25,11 +26,11 @@ class CompanyListView(ListView):
     # specify the model for list view
     model = Company
     template_name = 'core/company_list.html'
-    # queryset = Item.objects.all()
-    context_object_name = 'object_list'
+    context_object_name = 'object'
     
     def get_queryset(self):
-        return Company.objects.filter() # TODO filter the companies
+        
+        return self.request.user.company # TODO filter the companies
 
 class CompanyCreateView(CreateView):
     model = Company
