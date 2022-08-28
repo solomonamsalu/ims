@@ -82,7 +82,10 @@ class StoreListView(ListView):
     context_object_name = 'object_list'
     
     def get_queryset(self):
-        return Store.objects.filter() # ODO filter the companies
+        if self.request.user.company_owner:
+            
+            return self.request.user.company.store_set.all()
+        return Store.objects.filter() # TODO filter the companies
 class StoreUpdateView(UpdateView):
     model =Store
     fields = '__all__'

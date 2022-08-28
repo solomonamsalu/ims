@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin)
 from django.utils.translation import gettext_lazy as _
-
+from django.forms import ValidationError
 
 class Company(models.Model):
 
@@ -77,3 +77,13 @@ class User(AbstractUser):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True, related_name='workers')
     company_owner = models.BooleanField(default=False)
     objects = CustomAccountManager()
+
+    # def clean(self):
+    #     store = self.cleaned_data.get('store')
+    #     company_owner = self.cleaned_data.get('company_owner')
+    #     if not store and not company_owner:
+    #         raise ValidationError('One of fields is required')
+    #     return self.cleaned_data
+    # def save(self, *args, **kwargs ):
+    #     self.clean()
+    #     return super().save(*args, **kwargs)
