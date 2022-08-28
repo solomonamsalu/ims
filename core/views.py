@@ -95,6 +95,11 @@ class StoreListView(ListView):
     # queryset = Item.objects.all()
     context_object_name = 'object_list'
     
+    def get_context_object_name(self, object_list):
+
+        if self.request.user.company_owner:
+            return 'object_list'
+        return 'object'
     def get_template_names(self):
         if self.request.user.company_owner:
             return ['core/store_list.html',]
