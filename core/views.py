@@ -48,7 +48,9 @@ class CompanyCreateView(CreateView):
         if form.is_valid():
             obj = form.save(commit=False)
             obj.save()
+            # make the comany the company of the current user
             request.user.company = obj
+            request.user.company_owner=True
             request.user.save()
             success_url = reverse('company-detail', kwargs={'pk': obj.id})
             return HttpResponseRedirect(success_url)
