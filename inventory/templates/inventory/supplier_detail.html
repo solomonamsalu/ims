@@ -22,7 +22,7 @@
               <td>{{ object.phone}}</td> 
               <td>{{ object.address}}</td>     
               <td>
-                <a href="{% url 'supplier-update' pk=object.id %}"><button >Edit</button></a>
+                <a href="{% url 'supplier-update' pk=object.id %}"><button class="btn btn-outline-info">Edit</button></a>
               </td>
             </tr>
          </table>{% endblock content %}

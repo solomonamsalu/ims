@@ -13,7 +13,7 @@
               <td>{{ object.purchase_order_number }}</td>
               <td>{{ object.quantity}}</td>   
               <td>
-                <a href="{% url 'purchaseorder-update' pk=object.id %}"><button >Edit</button></a>
+                <a href="{% url 'purchaseorder-update' pk=object.id %}"><button class="btn btn-outline-info">Edit</button></a>
               </td>
             </tr>
             {% endfor %}
@@ -21,7 +21,7 @@
 
         <div class="container">
             <a href="{% url 'purchaseorder-create' %}">
-              <button>Add Purchase_order</button>
+              <button class="btn btn-outline-info">Add Purchase_order</button>
             </a>
           </div>
     </div>

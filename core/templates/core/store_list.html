@@ -11,7 +11,7 @@
             <tr>
               <td>{{ object.store_number}}/{{object.company}}</td> 
               <td>
-                <a href="{% url 'store-update' pk=object.id %}"><button >Edit</button></a>
+                <a href="{% url 'store-update' pk=object.id %}"><button class="btn btn-outline-info">Edit</button></a>
               </td>
             </tr>
             {% endfor %}
@@ -19,7 +19,7 @@
 
         <div class="container">
             <a href="{% url 'store-create' %}">
-              <button>Add Store</button>
+              <button class="btn btn-outline-info">Add Store</button>
             </a>
           </div>
     </div>
