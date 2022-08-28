@@ -15,6 +15,8 @@ urlpatterns = [
 
     # supplier
     # path('suppliers/', views.SupplierListView.as_view(), name='supplier-list'),
+    path('stores/',views.StoreListView.as_view(),name='store-list'),
+    path('store/update/<pk>/',views.StoreUpdateView.as_view(),name='store-update'),
     path('store/add/', views.StoreCreateView.as_view(), name='store-create'), 
     path('store/detail/<pk>/', views.StoreDetailView.as_view() , name='store-detail'),
     # path('suppliers/update/<pk>/', views.SupplierUpdateView.as_view() , name='supplier-update'),

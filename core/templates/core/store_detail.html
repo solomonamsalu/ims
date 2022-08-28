@@ -1,10 +1,22 @@
 
 
 {% include "layouts/base.html" %}
-
 {% block content %}
-
-    <div>{{object.name}}</div>
-    <div>{{object.seling_price}}</div>
-    
-{% endblock content %}
+<div class="container" >
+<table class="table">
+            <tr>
+              <th>store-number</th>
+              <th>company</th>
+              <th>address</th>
+              
+            </tr>
+        
+            <tr>
+              <td>{{ object.store_number }}</td>
+              <td>{{ object.company}}</td>
+              <td>{{ object.address}}</td>     
+              <td>
+                <a href="{% url 'store-update' pk=object.id %}"><button >Edit</button></a>
+              </td>
+            </tr>
+         </table>{% endblock content %}

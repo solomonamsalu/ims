@@ -56,4 +56,20 @@ class StoreCreateView(CreateView):
 class StoreDetailView(DetailView):
       model = Store
       template_name = 'core/store_detail.html'
+class StoreListView(ListView):
+   
+    # specify the model for list view
+    model = Store
+    template_name = 'core/store_list.html'
+    # queryset = Item.objects.all()
+    context_object_name = 'object_list'
+    
+    def get_queryset(self):
+        return Store.objects.filter() # ODO filter the companies
+class StoreUpdateView(UpdateView):
+    model =Store
+    fields = '__all__'
+    template_name = 'core/store_create.html'
+
+
 
