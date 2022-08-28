@@ -1,6 +1,7 @@
 
 
 from allauth.account.forms import LoginForm, SignupForm
+from django.shortcuts import redirect
 from requests import request
 from core.models import Store
 from django import forms
@@ -30,7 +31,7 @@ class CustomLoginForm(LoginForm):
         form = CustomLoginForm(self.request.POST)
         store_number = CustomLoginForm(self.request.POST).data['store_number']
         if self.user.store.store_number != store_number:
-            return HttpResponse('not loggedin')
+            return redirect('account_login')
         # Add your own processing here.
 
         # You must return the original result.
