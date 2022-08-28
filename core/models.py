@@ -15,7 +15,6 @@ class Company(models.Model):
     def get_absolute_url(self):
         return reverse('company-detail', kwargs={'pk': self.pk})
 
-
 class Address(models.Model):
 
     city = models.CharField(max_length=255)

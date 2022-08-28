@@ -42,7 +42,19 @@ class CompanyCreateView(CreateView):
     fields = '__all__'
     template_name = 'core/company_create.html'
 
-    
+    def post(self,request, *args, **kwargs):
+
+        form = self.get_form_class()(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.save()
+            request.user.company = obj
+            request.user.save()
+            success_url = reverse('company-detail', kwargs={'pk': obj.id})
+            return HttpResponseRedirect(success_url)
+            
+        return self.form_invalid(form)
+
 class CompanyDetailView(DetailView):
       model = Company
       template_name = 'core/company_detail.html'
