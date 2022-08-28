@@ -5,24 +5,14 @@
 <table class="table">
             <tr>
               <th>name</th>
-              
             </tr>
-        
-            {% for object in object_list %}
             <tr>
               <td>{{ object.name }}</td> 
               <td>
                 <a href="{% url 'company-update' pk=object.id %}"><button >Edit</button></a>
               </td>
             </tr>
-            {% endfor %}
          </table>
-
-        <div class="container">
-            <a href="{% url 'company-create' %}">
-              <button>Add Company</button>
-            </a>
-          </div>
     </div>
     {% endblock content %}
   
