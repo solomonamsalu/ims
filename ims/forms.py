@@ -30,7 +30,8 @@ class CustomLoginForm(LoginForm):
     def login(self, *args, **kwargs):
         form = CustomLoginForm(self.request.POST)
         store_number = CustomLoginForm(self.request.POST).data['store_number']
-        if self.user.store.store_number != store_number:
+        
+        if self.user.store.store_number != store_number and self.user.company_worker == False:
             return redirect('account_login')
         # Add your own processing here.
 
