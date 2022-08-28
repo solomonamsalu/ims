@@ -165,12 +165,14 @@ SITE_ID=1
 
 # customize all auth
 
-# ACCOUNT_FORMS = {
-# 'signup': 'ims.forms.CustomSignupForm',
-# 'login': 'ims.forms.CustomLoginForm',
-# }
+ACCOUNT_FORMS = {
+'signup': 'ims.forms.CustomSignupForm',
+'login': 'ims.forms.CustomLoginForm',
+}
 
 
 # all auth configurations
 ACCOUNT_CONFIRM_EMAIL_ON_GET = False
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+
