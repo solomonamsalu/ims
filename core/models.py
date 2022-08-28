@@ -76,5 +76,5 @@ class User(AbstractUser):
 
     store = models.ForeignKey(Store, on_delete=models.CASCADE, null=True, blank=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
-    company_worker = models.BooleanField(default=False)
+    company_owner = models.BooleanField(default=False)
     objects = CustomAccountManager()

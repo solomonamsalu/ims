@@ -1,5 +1,6 @@
 
 
+from email.policy import default
 from allauth.account.forms import LoginForm, SignupForm
 from django.shortcuts import redirect
 from requests import request
@@ -11,7 +12,8 @@ from django.http.response import HttpResponse
 class CustomSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label='First Name')
     last_name = forms.CharField(max_length=30, label='Last Name')
-    store = forms.ModelChoiceField(queryset=Store.objects.all())
+    store_number = forms.ModelChoiceField(queryset=Store.objects.all())
+    company_owner = forms.BooleanField(initial=False)
  
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
@@ -31,7 +33,7 @@ class CustomLoginForm(LoginForm):
         form = CustomLoginForm(self.request.POST)
         store_number = CustomLoginForm(self.request.POST).data['store_number']
         
-        if self.user.store.store_number != store_number and self.user.company_worker == False:
+        if self.user.store.store_number != store_number and self.user.company_owner == False:
             return redirect('account_login')
         # Add your own processing here.
 
