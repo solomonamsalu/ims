@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from inventory.models import Item, Store
 from django.conf import settings
-
+from django.urls import reverse
 class Customer(models.Model):
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -44,4 +44,5 @@ class SalesOrder(models.Model):
 
             raise ValidationError({"quantity": f"You are trying to sell beyond the available stock! Maximum you can order is {self.item.on_hand_stock}"})
 
-
+    def get_absolute_url(self):
+        return reverse('salesorder-detail', kwargs={'pk': self.pk})

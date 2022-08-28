@@ -4,7 +4,6 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DeleteView, DetailView, ListView,UpdateView
-from requests import request
 
 from core.models import Company, Store
 from inventory.models import Item
@@ -92,15 +91,20 @@ class StoreListView(ListView):
    
     # specify the model for list view
     model = Store
-    template_name = 'core/store_list.html'
+    # template_name = 'core/store_list.html'
     # queryset = Item.objects.all()
     context_object_name = 'object_list'
     
+    def get_template_names(self):
+        if self.request.user.company_owner:
+            return ['core/store_list.html',]
+        return ['core/store_detail.html',]
+        # return if self.requsuper().get_template_names()
+
     def get_queryset(self):
         if self.request.user.company_owner:
-            
             return self.request.user.company.store_set.all()
-        return Store.objects.filter() # TODO filter the companies
+        return self.request.user.store
 class StoreUpdateView(UpdateView):
     model =Store
     fields = '__all__'
