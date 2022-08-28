@@ -35,7 +35,7 @@ class SalesOrderDetailView(DetailView):
 class SalesOrderUpdateView(UpdateView):
     model = SalesOrder
     fields = '__all__'
-    template_name: str = 'item_create.html'
+    template_name: str = 'sales_order_create.html'
 
 class SalesOrderDeleteView(DeleteView):
     model = SalesOrder
