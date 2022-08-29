@@ -9,6 +9,4 @@ class AddPurchaseOrderForm(forms.ModelForm):
         fields = ['supplier', 'deliver_to', 'purchase_order_number',  'item', 'quantity', 'rate']
 
     def save(self, commit):
-        self.clean()
-
         return super().save(commit)

@@ -37,9 +37,9 @@ class PurchaseOrderCreateView(CreateView):
             success_url = reverse('purchaseorder-detail', kwargs={'pk': obj.id})
             return HttpResponseRedirect(success_url)
             
-        return self.form_invalid(form)
-   
-           
+        return super().post(request, *args, **kwargs)
+       
+
 class PurchaseOrderDetailView(DetailView):
       model = PurchaseOrder
       template_name = 'purchase/purchaseorder_detail.html'
