@@ -62,7 +62,7 @@ class CompanyDetailView(DetailView):
 class CompanyUpdateView(UpdateView):
     model = Company
     fields = '__all__'
-    template_name = 'core/company_create.html'
+    template_name = 'core/company_update.html'
 
 class StoreCreateView(CreateView):
     model = Store

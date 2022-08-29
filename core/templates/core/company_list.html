@@ -2,9 +2,10 @@
 {% include "layouts/base.html" %}
 {% block content %}
 <div class="container" >
-        
-  {% if object %}
-      {{ object.name }}
+    <div class="jumbotron"><h1>company</h1></div>  
+  {% if object %}<div class="list-group">
+     <li class="list-group-item"> {{ object.name }}</li>
+    </div>
         <a href="{% url 'company-update' pk=object.id %}"><button class="btn btn-outline-info">Edit</button></a>
   {% else %}
   <div class="container">
