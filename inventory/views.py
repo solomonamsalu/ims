@@ -76,7 +76,7 @@ class SupplierDetailView(DeleteView):
 class SupplierUpdateView(UpdateView):
     model = Supplier
     fields = '__all__'
-    template_name: str = 'inventory/supplier_create.html'
+    template_name: str = 'inventory/supplier_update.html'
 
 class SupplierDeleteView(DeleteView):
     model = Supplier
