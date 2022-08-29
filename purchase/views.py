@@ -23,7 +23,7 @@ class PurchaseOrderistView(ListView):
         if self.request.user.company_owner:
             return PurchaseOrder.objects.filter(item__store__company= self.request.user.company)
         
-        return PurchaseOrder.objects.filter(item__store = self.request.user.store)
+        return PurchaseOrder.objects.filter()
 
 class PurchaseOrderCreateView(CreateView):
     model = PurchaseOrder
