@@ -34,8 +34,9 @@ class CustomLoginForm(LoginForm):
         form = CustomLoginForm(self.request.POST)
         store_number =form.data['store_number']
         
-        if self.user.store.store_number != store_number and self.user.company_owner == False:
-            return redirect('account_login')
+        if self.user.company_owner == False: 
+            if self.user.store.store_number != store_number:
+                return redirect('account_login')
         # Add your own processing here.
 
         # You must return the original result.

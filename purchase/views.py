@@ -20,7 +20,10 @@ class PurchaseOrderistView(ListView):
     context_object_name = 'object_list'
     
     def get_queryset(self):
-        return PurchaseOrder.objects.filter(item__store= self.request.user.store)
+        if self.request.user.company_owner:
+            return PurchaseOrder.objects.filter(item__store__company= self.request.user.company)
+        
+        return PurchaseOrder.objects.filter(item__store = self.request.user.store)
 
 class PurchaseOrderCreateView(CreateView):
     model = PurchaseOrder
