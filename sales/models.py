@@ -25,7 +25,6 @@ class Customer(models.Model):
 class SalesOrder(models.Model):
 
     customer_name=models.ForeignKey(Customer,on_delete=models.CASCADE)
-    branch=models.CharField(max_length=255)
     sales_order_number=models.CharField(max_length=100)
     sales_order_date=models.DateTimeField(auto_now_add=True)
     item=models.ForeignKey(Item, on_delete= models.CASCADE)

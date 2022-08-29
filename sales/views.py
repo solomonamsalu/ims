@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
+from sales.forms import AddSalesOrderForm
 from sales.models import SalesOrder
 
 @method_decorator(login_required, name='dispatch')
@@ -23,10 +24,19 @@ class SalesOrderListView(ListView):
 
 class SalesOrderCreateView(CreateView):
     model = SalesOrder
-    fields = '__all__'
     template_name = 'sales_order_create.html'
+    form_class = AddSalesOrderForm
 
-   
+    def post(self,request, *args, **kwargs):
+        form = self.form_class(self.request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.store = self.request.user.store
+            obj.save()
+            success_url = reverse('purchaseorder-detail', kwargs={'pk': obj.id})
+            return HttpResponseRedirect(success_url)
+            
+        return super().post(request, *args, **kwargs)
            
 class SalesOrderDetailView(DetailView):
       model = SalesOrder
