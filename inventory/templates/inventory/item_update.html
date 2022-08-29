@@ -1,10 +1,9 @@
-
-            {% include "layouts/base.html" %}
+{% include "layouts/base.html" %}
 
 
     {% block content %}
         <div class="container">
-            <div class="jumbotron"><h1>add item</h1></div>
+            <div class="jumbotron"><h1>update item</h1></div>
             <form class="form-horizontal" method="POST">
                 <div>
                 {% csrf_token %}

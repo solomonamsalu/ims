@@ -45,7 +45,7 @@ class ItemDetailView(DetailView):
 class ItemUpdateView(UpdateView):
     model = Item
     fields = '__all__'
-    template_name: str = 'inventory/item_create.html'
+    template_name: str = 'inventory/item_update.html'
 
 class ItemDeleteView(DeleteView):
     model = Item

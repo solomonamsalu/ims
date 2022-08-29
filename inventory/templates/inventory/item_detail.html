@@ -1,14 +1,9 @@
-
-
-    <div>{{object.name}}</div>
-    <div>{{object.seling_price}}</div>
-    
-</body>
-</html>{% include "layouts/base.html" %}
+{% include "layouts/base.html" %}
 {% block content %}
 <div class="container" >
-<table class="table">
-            <tr>
+  <div class="jumbotron"> <h1>item detail</h1></div>
+<table class="table table-bordered">
+            <tr class="jumbotron">
               <th>name</th>
               <th>store</th>
               <th>SKU_number</th>
@@ -34,10 +29,8 @@
               <td>object.reorder_point</td>
               <td>object.Preferred_supplier</td>
               <td> object.enough</td>
-
-              <td>
-                <a href="{% url 'item-update' pk=object.id %}"><button class="btn btn-outline-info">Edit</button>
-                </a>
-              </td>
             </tr>
-         </table>{% endblock content %}
+         </table>
+         <a href="{% url 'item-update' pk=object.id %}"><button class="btn btn-outline-info">Edit</button>
+         </a>
+         {% endblock content %}
