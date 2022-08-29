@@ -2,7 +2,8 @@
 {% block content %}
 <div class="container" >
   <div class="jumbotron"> <h1>item detail</h1></div>
-<table class="table table-condensed">
+  <div class="table-responsive">
+<table class="table table-bordered">
             <tr class="jumbotron">
               <th>name</th>
               <th>store</th>
@@ -30,7 +31,9 @@
               <td>object.Preferred_supplier</td>
               <td> object.enough</td>
             </tr>
-         </table><div class="text-right">
+         </table>
+        </div>
+         <div class="text-right">
          <a href="{% url 'item-update' pk=object.id %}"><button class="btn btn-outline-info">Edit</button>
          </a></div>
          {% endblock content %}

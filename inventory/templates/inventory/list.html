@@ -5,18 +5,18 @@
     <div class="container" >
       <div class="jumbotron"> 
         <h1>items</h1></div>
-        <table class="table table-bordered">
-          <tr class="jumbotron">
-              <th >Item name</th>
-              <th >Item Price</th>
-            </tr>
-            {% for object in object_list %}
-            <tr>
-              <td ><a href="{% url 'item-detail' pk=object.id %}">{{ object.name }}</a></td>
-              <td>{{ object.selling_price }}</td>
-            </tr>
-            {% endfor %}
-         </table>
+          <table class="table table-bordered">
+            <tr class="jumbotron">
+                <th >Item name</th>
+                <th >Item Price</th>
+              </tr>
+              {% for object in object_list %}
+              <tr>
+                <td ><a href="{% url 'item-detail' pk=object.id %}">{{ object.name }}</a></td>
+                <td>{{ object.selling_price }}</td>
+              </tr>
+              {% endfor %}
+          </table>
 
         <div class="container">
             <a href="{% url 'item-create' %}">
