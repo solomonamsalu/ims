@@ -26,7 +26,7 @@ class PurchaseOrderistView(ListView):
         
         return PurchaseOrder.objects.filter()
 
-class PurchaseOrderCreateView(CreateView):
+class PurchaseOrderCreateView(FormView):
     model = PurchaseOrder
     template_name = 'purchase/purchaseorder_create.html'
     form_class = AddPurchaseOrderForm    

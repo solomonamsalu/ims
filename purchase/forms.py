@@ -8,7 +8,6 @@ from core.models import User
 
 class AddPurchaseOrderForm(forms.ModelForm):
   
-
     def __init__(self,  *args,  **kwargs):
         
         try:
@@ -16,13 +15,10 @@ class AddPurchaseOrderForm(forms.ModelForm):
         except:
             pass
         super(AddPurchaseOrderForm, self).__init__(*args, **kwargs)
-        user = User.objects.all()[0]
         if user.company_owner:
-            self.fields['item'].queryset = Item.objects.filter(store_company=user.company)
-            print()
+            self.fields['item'].queryset = Item.objects.filter(store__company=user.company)
         else:
             self.fields['item'].queryset = Item.objects.filter(store=user.store)
-            print()
 
     class Meta:
         model=PurchaseOrder
