@@ -25,7 +25,7 @@ class PurchaseOrderistView(ListView):
 
 class PurchaseOrderCreateView(CreateView):
     model = PurchaseOrder
-    fields = '__all__'
+    fields = ['supplier', 'branch', 'deliver_to', 'purchase_order_number',  'item', 'quantity', 'rate']
     template_name = 'purchase/purchaseorder_create.html'
 
    
