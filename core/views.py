@@ -113,7 +113,7 @@ class StoreListView(ListView):
 class StoreUpdateView(UpdateView):
     model =Store
     fields = '__all__'
-    template_name = 'core/store_create.html'
+    template_name = 'core/store_update.html'
 
 
 
