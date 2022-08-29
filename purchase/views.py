@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
-
+from purchase.forms import AddPurchaseOrderForm
 from purchase.models import PurchaseOrder
 
 @method_decorator(login_required, name='dispatch')
@@ -25,9 +25,19 @@ class PurchaseOrderistView(ListView):
 
 class PurchaseOrderCreateView(CreateView):
     model = PurchaseOrder
-    fields = ['supplier', 'branch', 'deliver_to', 'purchase_order_number',  'item', 'quantity', 'rate']
     template_name = 'purchase/purchaseorder_create.html'
+    form_class = AddPurchaseOrderForm
 
+    def post(self,request, *args, **kwargs):
+        form = self.form_class(self.request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.store = self.request.user.store
+            obj.save()
+            success_url = reverse('purchaseorder-detail', kwargs={'pk': obj.id})
+            return HttpResponseRedirect(success_url)
+            
+        return self.form_invalid(form)
    
            
 class PurchaseOrderDetailView(DetailView):

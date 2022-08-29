@@ -8,8 +8,7 @@ from django.urls import reverse
 class PurchaseOrder(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE, null=True, blank=True)
     supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE)
-    branch=models.CharField(max_length=200) # FIXME fix to foreignkey
-    deliver_to = models.ForeignKey(Address, on_delete=models.CASCADE)
+    deliver_to = models.TextField()
     purchase_order_number=models.CharField(max_length=100)
     date=models.DateField(auto_now_add=True)
     item=models.ForeignKey(Item, on_delete= models.CASCADE)
