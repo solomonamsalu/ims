@@ -9,6 +9,7 @@ class AddItemForm(forms.ModelForm):
     def save(self, commit):
 
         return super().save(commit)
+        
 class AddSupplierForm(forms.ModelForm):
     class Meta:
         model=Supplier

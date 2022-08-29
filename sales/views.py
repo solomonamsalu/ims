@@ -19,8 +19,8 @@ class SalesOrderListView(ListView):
     # queryset = Item.objects.all()
     context_object_name = 'object_list'
     
-    # def get_queryset(self):
-    #     return SalesOrder.objects.filter(store= self.request.user.store)
+    def get_queryset(self):
+        return SalesOrder.objects.filter(item__store= self.request.user.store)
 
 class SalesOrderCreateView(CreateView):
     model = SalesOrder

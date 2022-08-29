@@ -6,7 +6,8 @@ from inventory.models import Item, Supplier
 from django.urls import reverse
 
 class PurchaseOrder(models.Model):
-    store = models.ForeignKey(Store, on_delete=models.CASCADE, null=True, blank=True)
+    # store = models.ForeignKey(Store, on_delete=models.CASCADE, null=True, blank=True)
+    
     supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE)
     deliver_to = models.TextField()
     purchase_order_number=models.CharField(max_length=100)

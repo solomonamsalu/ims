@@ -23,7 +23,7 @@ class Customer(models.Model):
     def last_name(self):
         return self.user.last_name
 class SalesOrder(models.Model):
-
+    
     customer_name=models.ForeignKey(Customer,on_delete=models.CASCADE)
     sales_order_number=models.CharField(max_length=100)
     sales_order_date=models.DateTimeField(auto_now_add=True)

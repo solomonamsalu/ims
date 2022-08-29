@@ -15,13 +15,12 @@ class PurchaseOrderistView(ListView):
    
     # specify the model for list view
     model = PurchaseOrder
-
     template_name = 'purchase/list.html'
     # queryset = Item.objects.all()
     context_object_name = 'object_list'
     
     def get_queryset(self):
-        return PurchaseOrder.objects.filter(store= self.request.user.store)
+        return PurchaseOrder.objects.filter(item__store= self.request.user.store)
 
 class PurchaseOrderCreateView(CreateView):
     model = PurchaseOrder
