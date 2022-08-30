@@ -29,11 +29,15 @@ class CompanyListView(ListView):
     
     def get_queryset(self):
         
-        company = self.request.user.company
+        try:
+            company = self.request.user.store.company
+        except:
+            company = self.request.user.company
+
         if company:
             return company
         else:
-            return None
+            return Company.objects.none()
 
 class CompanyCreateView(CreateView):
     model = Company
