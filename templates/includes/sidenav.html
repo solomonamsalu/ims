@@ -45,9 +45,17 @@
             <li class="nav-item">
               <a class="nav-link {% if 'icons' in segment %} active {% endif %}" href="{% url 'purchaseorder-list' %}">
                 <i class="ni ni-planet text-orange"></i>
-                <span class="nav-link-text">Purchase_order</span>
+                <span class="nav-link-text">Purchase orders</span>
               </a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link {% if 'icons' in segment %} active {% endif %}" href="{% url 'purchasereceive-list' %}">
+                <i class="ni ni-planet text-orange"></i>
+                <span class="nav-link-text">Purchase Receives</span>
+              </a>
+            </li>
+
             <li class="nav-item">
               <a class="nav-link {% if 'map' in segment %} active {% endif %}" href="{% url 'salesorder-list' %}">
                 <i class="ni ni-pin-3 text-primary"></i>

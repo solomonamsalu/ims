@@ -14,8 +14,8 @@ def home(request):
 
     return render(request, 'layouts/base.html')
 
+@method_decorator(login_required, name='dispatch')
 def profile(request):
-    
     return render(request, 'home/profile.html')
 
 
@@ -29,11 +29,15 @@ class CompanyListView(ListView):
     
     def get_queryset(self):
         
-        company = self.request.user.company
+        try:
+            company = self.request.user.store.company
+        except:
+            company = self.request.user.company
+
         if company:
             return company
         else:
-            return None
+            return Company.objects.none()
 
 class CompanyCreateView(CreateView):
     model = Company
@@ -56,6 +60,7 @@ class CompanyCreateView(CreateView):
             
         return self.form_invalid(form)
 
+@method_decorator(login_required, name='dispatch')
 class CompanyDetailView(DetailView):
       model = Company
       template_name = 'core/company_detail.html'
@@ -83,10 +88,12 @@ class StoreCreateView(CreateView):
             
         return self.form_invalid(form)
 
-    
+@method_decorator(login_required, name='dispatch')    
 class StoreDetailView(DetailView):
       model = Store
       template_name = 'core/store_detail.html'
+
+@method_decorator(login_required, name='dispatch')
 class StoreListView(ListView):
    
     # specify the model for list view
