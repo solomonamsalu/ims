@@ -14,8 +14,8 @@ def home(request):
 
     return render(request, 'layouts/base.html')
 
+@method_decorator(login_required, name='dispatch')
 def profile(request):
-    
     return render(request, 'home/profile.html')
 
 
@@ -56,6 +56,7 @@ class CompanyCreateView(CreateView):
             
         return self.form_invalid(form)
 
+@method_decorator(login_required, name='dispatch')
 class CompanyDetailView(DetailView):
       model = Company
       template_name = 'core/company_detail.html'
@@ -87,7 +88,7 @@ class StoreCreateView(CreateView):
 class StoreDetailView(DetailView):
       model = Store
       template_name = 'core/store_detail.html'
-      
+
 @method_decorator(login_required, name='dispatch')
 class StoreListView(ListView):
    
