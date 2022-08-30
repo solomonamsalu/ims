@@ -83,10 +83,12 @@ class StoreCreateView(CreateView):
             
         return self.form_invalid(form)
 
-    
+@method_decorator(login_required, name='dispatch')    
 class StoreDetailView(DetailView):
       model = Store
       template_name = 'core/store_detail.html'
+      
+@method_decorator(login_required, name='dispatch')
 class StoreListView(ListView):
    
     # specify the model for list view
