@@ -4,8 +4,9 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
+from django.views import View
 from django.views.generic import DetailView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 from django.views.generic.list import ListView
 from purchase.forms import AddPurchaseOrderForm
 from purchase.models import PurchaseOrder
@@ -25,10 +26,15 @@ class PurchaseOrderistView(ListView):
         
         return PurchaseOrder.objects.filter()
 
-class PurchaseOrderCreateView(CreateView):
+class PurchaseOrderCreateView(FormView):
     model = PurchaseOrder
     template_name = 'purchase/purchaseorder_create.html'
-    form_class = AddPurchaseOrderForm
+    form_class = AddPurchaseOrderForm    
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
     def post(self,request, *args, **kwargs):
         form = self.form_class(self.request.POST)
@@ -40,7 +46,7 @@ class PurchaseOrderCreateView(CreateView):
             return HttpResponseRedirect(success_url)
             
         return super().post(request, *args, **kwargs)
-       
+        
 
 class PurchaseOrderDetailView(DetailView):
       model = PurchaseOrder

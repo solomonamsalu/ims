@@ -1,10 +1,11 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 from django.views.generic.list import ListView
 
 from inventory.forms import AddItemForm
@@ -30,6 +31,8 @@ class ItemCreateView(CreateView):
     def post(self,request, *args, **kwargs):
         form = self.form_class(self.request.POST)
         if form.is_valid():
+            if self.request.user.company_owner:
+                return HttpResponse("You can't create an item.")
             obj = form.save(commit=False)
             obj.store = self.request.user.store
             obj.save()
@@ -37,7 +40,12 @@ class ItemCreateView(CreateView):
             return HttpResponseRedirect(success_url)
             
         return self.form_invalid(form)
-           
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
 class ItemDetailView(DetailView):
       model = Item
       template_name = 'inventory/item_detail.html'

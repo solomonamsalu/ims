@@ -30,6 +30,11 @@ class SalesOrderCreateView(CreateView):
     template_name = 'sales_order_create.html'
     form_class = AddSalesOrderForm
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+        
     def post(self,request, *args, **kwargs):
         form = self.form_class(self.request.POST)
         if form.is_valid():
