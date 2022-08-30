@@ -16,6 +16,7 @@ class PurchaseOrder(models.Model):
     quantity = models.IntegerField()
     rate = models.FloatField()
     amount = models.FloatField(null=True, blank=True)
+    received = models.BooleanField(default=False)
     
     def save(self, *args, **kwargs):
         self.amount = self.quantity*self.rate

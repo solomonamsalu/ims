@@ -19,6 +19,8 @@ class AddPurchaseOrderForm(forms.ModelForm):
             self.fields['item'].queryset = Item.objects.filter(store__company=user.company)
         else:
             self.fields['item'].queryset = Item.objects.filter(store=user.store)
+            self.fields['deliver_to'].initial = user.store.address
+
 
     class Meta:
         model=PurchaseOrder
