@@ -11,12 +11,29 @@ from django.views.generic.list import ListView
 from purchase.forms import AddPurchaseOrderForm
 from purchase.models import PurchaseOrder
 
+
+@method_decorator(login_required, name='dispatch')
+class PurchaseReceiveListView(ListView):
+   
+    # specify the model for list view
+    model = PurchaseOrder
+    template_name = 'purchase/purchasereceive_list.html'
+    # queryset = Item.objects.all()
+    context_object_name = 'object_list'
+    
+    def get_queryset(self):
+        if self.request.user.company_owner:
+            return PurchaseOrder.objects.filter(item__store__company= self.request.user.company, received = True)
+        
+        return PurchaseOrder.objects.filter(item__store = self.request.user.store, received = True)
+
+
 @method_decorator(login_required, name='dispatch')
 class PurchaseOrderistView(ListView):
    
     # specify the model for list view
     model = PurchaseOrder
-    template_name = 'purchase/list.html'
+    template_name = 'purchase/purchaseorder_list.html'
     # queryset = Item.objects.all()
     context_object_name = 'object_list'
     
@@ -24,7 +41,7 @@ class PurchaseOrderistView(ListView):
         if self.request.user.company_owner:
             return PurchaseOrder.objects.filter(item__store__company= self.request.user.company)
         
-        return PurchaseOrder.objects.filter()
+        return PurchaseOrder.objects.filter(item__store = self.request.user.store)
 
 class PurchaseOrderCreateView(FormView):
     model = PurchaseOrder

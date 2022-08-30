@@ -3,9 +3,10 @@ from django.urls import path
 from purchase import views
 
 urlpatterns = [
-    path('purchasorders/', views.PurchaseOrderistView.as_view(), name='purchaseorder-list'),
-    path('purchasorders/add/', views.PurchaseOrderCreateView.as_view(), name='purchaseorder-create'), 
-    path('purchasorders/detail/<pk>/', views.PurchaseOrderDetailView.as_view() , name='purchaseorder-detail'),
-    path('purchasorders/update/<pk>/', views.PurchaseOrderUpdateView.as_view() , name='purchaseorder-update'),
-    path('purchasorders/delete/<pk>/', views.PurchaseOrderDeleteView.as_view() , name='purchaseorder-delete'),
+    path('purchaseorders/', views.PurchaseOrderistView.as_view(), name='purchaseorder-list'),
+    path('purchasereceives/', views.PurchaseOrderistView.as_view(), name='purchasereceive-list'),
+    path('purchaseorders/add/', views.PurchaseOrderCreateView.as_view(), name='purchaseorder-create'), 
+    path('purchaseorders/detail/<pk>/', views.PurchaseOrderDetailView.as_view() , name='purchaseorder-detail'),
+    path('purchaseorders/update/<pk>/', views.PurchaseOrderUpdateView.as_view() , name='purchaseorder-update'),
+    path('purchaseorders/delete/<pk>/', views.PurchaseOrderDeleteView.as_view() , name='purchaseorder-delete'),
 ]
