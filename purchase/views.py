@@ -72,7 +72,7 @@ class PurchaseOrderDetailView(DetailView):
 class PurchaseOrderUpdateView(UpdateView):
     model = PurchaseOrder
     fields = '__all__'
-    template_name: str = 'purchase/item_create.html'
+    template_name: str = 'purchase/purchaseorder-update.html'
 
 class PurchaseOrderDeleteView(DeleteView):
     model = PurchaseOrder
