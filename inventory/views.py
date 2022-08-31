@@ -21,6 +21,8 @@ class ItemListView(ListView):
     context_object_name = 'object_list'
     
     def get_queryset(self):
+        if self.request.user.company_owner:
+            return Item.objects.filter(store__company = self.request.user.company)
         return Item.objects.filter(store= self.request.user.store)
 
 class ItemCreateView(CreateView):
