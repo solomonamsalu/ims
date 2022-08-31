@@ -1,8 +1,9 @@
 {% extends "layouts/base.html" %}
 {% block content %}
 <div class="container" >
-<table class="table">
-            <tr>
+  <div class="jumbotron">purchase-orders </div>
+<table class="table table-bordered">
+            <tr class="jumbotron">
               <th>purchase_order_number</th>
               <th>quantity</th>
               
@@ -10,12 +11,8 @@
         
             {% for object in object_list %}
             <tr>
-              <td>{{ object.purchase_order_number }}</td>
-              <td>{{ object.quantity}}</td>   
-              <td>{{ object.item.store.name}}</td>   
-              <td>
-                <a href="{% url 'purchaseorder-update' pk=object.id %}"><button class="btn btn-outline-info">Edit</button></a>
-              </td>
+              <td><a href="{%url 'purchaseorder-detail' pk=object.id %}">{{ object.purchase_order_number }}</a></td>
+              <td>{{ object.quantity}}</td>    
             </tr>
             {% endfor %}
          </table>

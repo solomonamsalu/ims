@@ -3,8 +3,9 @@
 {% extends "layouts/base.html" %}
 {% block content %}
 <div class="container" >
-<table class="table">
-            <tr>
+  <div class="jumbotron"> purchase-order detail</div>
+<table class="table table-bordered">
+            <tr class="jumbotron">
               <th>supplier</th>
               <th>branch</th>
               <th>deliver_to</th>
@@ -26,9 +27,10 @@
               <td>{{ object.item}}</td>  
               <td>{{ object.quantity}}</td>
               <td>{{ object.rate}}</td> 
-              <td>{{ object.amount}}</td>   
-              <td>
-                <a href="{% url 'purchaseorder-update' pk=object.id %}"><button class="btn btn-outline-info">Edit</button></a>
-              </td>
+              <td>{{ object.amount}}</td> 
             </tr>
-         </table>{% endblock content %}
+              </table>
+              <div class="text-right">
+              <a href="{% url 'purchaseorder-update' pk=object.id %}"><button class="btn btn-outline-info">Edit</button></a>
+            </div>
+         {% endblock content %}
