@@ -12,7 +12,7 @@ from django.http.response import HttpResponse
 class CustomSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label='First Name')
     last_name = forms.CharField(max_length=30, label='Last Name')
-    store = forms.ModelChoiceField(queryset=Store.objects.all(), required=False)
+    store = forms.CharField(max_length=100,required=False, initial='company owner')
     # company_owner = forms.BooleanField(initial=False, required=False)
  
     def save(self, request):
@@ -20,7 +20,8 @@ class CustomSignupForm(SignupForm):
         user = super(CustomSignupForm, self).save(request)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
-        user.store = self.cleaned_data['store']
+        store = Store.objects.get(store_number=self.cleaned_data['store'])
+        user.store = store
         user.save()
         return user
 
