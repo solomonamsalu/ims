@@ -12,7 +12,7 @@ from django.http.response import HttpResponse
 class CustomSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label='First Name')
     last_name = forms.CharField(max_length=30, label='Last Name')
-    store = forms.CharField(max_length=100,required=False, initial='company owner')
+    store = forms.CharField(max_length=100,required=False, initial='if you are a company owner, skip',)
     # company_owner = forms.BooleanField(initial=False, required=False)
  
     def save(self, request):

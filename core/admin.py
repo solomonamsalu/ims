@@ -6,7 +6,7 @@ class UserAdmin(BaseUserAdmin):
     
     def get_list_display(self, request):
 
-        self.list_display += ('store',)
+        self.list_display += ('store','company_owner')
         return self.list_display
 class CompanyAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Company._meta.fields]
