@@ -20,8 +20,14 @@ class CustomSignupForm(SignupForm):
         user = super(CustomSignupForm, self).save(request)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
-        store = Store.objects.get(store_number=self.cleaned_data['store'])
-        user.store = store
+        if self.cleaned_data['store'] == '' or self.cleaned_data['store']=='if you are a company owner, skip':
+            user.company_owner=True
+
+        try:
+            store = Store.objects.get(store_number=self.cleaned_data['store'])
+            user.store = store
+        except:
+            pass
         user.save()
         return user
 
