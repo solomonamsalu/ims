@@ -1,0 +1,35 @@
+
+
+{% extends "layouts/base.html" %}
+{% block content %}
+<div class="container" >
+  <div class="jumbotron">salesorder detail</div>
+<table class="table">
+            <tr class="jumbotron">
+              <th >customer_name</th>
+              <th>branch</th>
+              <th>sales_order_number</th>
+              <th>sales_order_date</th>
+              <th>item</th>
+              <th>quantity</th>
+              <th>rate</th>
+              <th>amount/th>
+              
+            </tr>
+        
+            <tr>
+              <td>{{ object.customer_name }}</td>
+              <td>{{ object.branch}}</td> 
+              <td>{{ object.sales_order_number}}</td>
+              <td>{{ object.sales_order_date}}</td> 
+              <td>{{ object.item}}</td>  
+              <td>{{ object.quantity}}</td>
+              <td>{{ object.rate}}</td> 
+              <td>{{ object.amount}}</td>
+            </tr>
+         </table>
+                <div class="text-right">
+                <a href="{% url 'salesorder-update' pk=object.id %}"><button class="btn btn-outline-info">Edit</button></a>
+                  
+                </div>
+         {% endblock content %}
