@@ -15,12 +15,14 @@ class AddPurchaseOrderForm(forms.ModelForm):
         except:
             pass
         super(AddPurchaseOrderForm, self).__init__(*args, **kwargs)
-        if user.company_owner:
-            self.fields['item'].queryset = Item.objects.filter(store__company=user.company)
-        else:
-            self.fields['item'].queryset = Item.objects.filter(store=user.store)
-            self.fields['deliver_to'].initial = user.store.address
-
+        try:
+            if user.company_owner:
+                self.fields['item'].queryset = Item.objects.filter(store__company=user.company)
+            else:
+                self.fields['item'].queryset = Item.objects.filter(store=user.store)
+                self.fields['deliver_to'].initial = user.store.address
+        except:
+            pass
 
     class Meta:
         model=PurchaseOrder
