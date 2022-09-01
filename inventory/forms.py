@@ -1,5 +1,5 @@
 from django import forms
-from core.models import Store
+from core.models import Company, Store
 
 from inventory.models import Item, Supplier
 class AddItemForm(forms.ModelForm):
@@ -27,6 +27,25 @@ class AddItemForm(forms.ModelForm):
         return super().save(commit)
         
 class AddSupplierForm(forms.ModelForm):
+
+
+    def __init__(self,  *args,  **kwargs):
+        
+        try:
+            user = kwargs.pop('user') # Important to do this
+        except:
+            pass
+        super(AddSupplierForm, self).__init__(*args, **kwargs)
+        try:
+            if user.company_owner:
+                    self.fields['store'].queryset = user.company.store_set
+            else:
+                self.fields['store'].initial = user.store
+                self.fields['store'].queryset = Store.objects.filter(id=user.store.id)
+        except:
+            pass
     class Meta:
         model=Supplier
-        fields='__all__'
+        fields = ['first_name', 'last_name', 'company_name',  'email', 'phone', 'address']
+
+    

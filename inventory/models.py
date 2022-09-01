@@ -6,7 +6,7 @@ from core.models import Company, Store
 
 
 class Supplier(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
     first_name=models.CharField(max_length=200)
     last_name=models.CharField(max_length=200)
     company_name=models.CharField(max_length=200)
