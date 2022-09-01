@@ -115,7 +115,10 @@ class StoreListView(ListView):
 
     def get_queryset(self):
         if self.request.user.company_owner:
-            return self.request.user.company.store_set.all()
+            try:
+                return self.request.user.company.store_set.all()
+            except:
+                return Store.objects.none()
         return self.request.user.store
 class StoreUpdateView(UpdateView):
     model =Store
