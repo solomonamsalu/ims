@@ -82,10 +82,10 @@ class CustomerCreateView(CreateView):
     template_name = 'sales/customer_create.html'
     form_class = AddCustomerForm
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user
-        return kwargs
+    # def get_form_kwargs(self):
+    #     kwargs = super().get_form_kwargs()
+    #     kwargs['user'] = self.request.user
+    #     return kwargs
         
     def post(self,request, *args, **kwargs):
         form = self.form_class(self.request.POST)

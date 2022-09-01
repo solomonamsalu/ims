@@ -3,10 +3,12 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DeleteView, DetailView, ListView,UpdateView
-
-from core.models import Company, Store
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
 from inventory.models import Item
+
+from core.forms import AddStoreForm
+from core.models import Company, Store
 
 
 @login_required(login_url="/accounts/login/")
@@ -71,13 +73,13 @@ class CompanyUpdateView(UpdateView):
 
 class StoreCreateView(CreateView):
     model = Store
-    # form_class = AddStoreForm
-    fields = ['store_number', 'address']
+    form_class = AddStoreForm
     template_name = 'core/store_create.html'
 
+    
     def post(self,request, *args, **kwargs):
 
-        form = self.get_form_class()(request.POST)
+        form = self.form_class(request.POST)
         if form.is_valid():
             # store_number = f.store_number
             obj = form.save(commit=False)
@@ -87,11 +89,16 @@ class StoreCreateView(CreateView):
                 obj.save()
             else:
                 obj.delete()
-            success_url = reverse('company-detail', kwargs={'pk': obj.id})
+            success_url = reverse('store-detail', kwargs={'pk': obj.id})
             return HttpResponseRedirect(success_url)
-            
+        # self.get_object()   
         return self.form_invalid(form)
-
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+        
 @method_decorator(login_required, name='dispatch')    
 class StoreDetailView(DetailView):
       model = Store
