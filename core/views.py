@@ -79,10 +79,14 @@ class StoreCreateView(CreateView):
 
         form = self.get_form_class()(request.POST)
         if form.is_valid():
+            # store_number = f.store_number
             obj = form.save(commit=False)
-            # make the comany the company of the current user
-            obj.company = self.request.user.company
-            obj.save()
+            # make the comany the company of the current Store
+            if self.request.user.company:
+                obj.company = self.request.user.company
+                obj.save()
+            else:
+                obj.delete()
             success_url = reverse('company-detail', kwargs={'pk': obj.id})
             return HttpResponseRedirect(success_url)
             
