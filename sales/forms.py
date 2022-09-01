@@ -3,7 +3,7 @@
 from django import forms
 from inventory.models import Item
 
-from sales.models import SalesOrder
+from sales.models import Customer, SalesOrder
 
 
 class AddSalesOrderForm(forms.ModelForm):
@@ -23,6 +23,17 @@ class AddSalesOrderForm(forms.ModelForm):
     class Meta:
         model=SalesOrder
         fields = ['customer_name',  'sales_order_number',  'item', 'quantity', 'rate']
+
+    def save(self, commit):
+        return super().save(commit)
+
+class AddCustomerForm(forms.ModelForm):
+    
+    
+
+    class Meta:
+        model=Customer
+        fields = [ 'user',  'phone', 'address']
 
     def save(self, commit):
         return super().save(commit)

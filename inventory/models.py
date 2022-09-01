@@ -1,13 +1,12 @@
 from tkinter import CASCADE
 
-from core.models import Address
 from django.db import models
 from django.urls import reverse
-from core.models import Store
-
+from core.models import Company, Store
 
 
 class Supplier(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
     first_name=models.CharField(max_length=200)
     last_name=models.CharField(max_length=200)
     company_name=models.CharField(max_length=200)

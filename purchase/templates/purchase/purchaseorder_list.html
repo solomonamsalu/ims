@@ -6,6 +6,7 @@
             <tr class="jumbotron">
               <th>purchase_order_number</th>
               <th>quantity</th>
+              <th>Store</th>
               
             </tr>
         
@@ -13,6 +14,8 @@
             <tr>
               <td><a href="{%url 'purchaseorder-detail' pk=object.id %}">{{ object.purchase_order_number }}</a></td>
               <td>{{ object.quantity}}</td>    
+              <td>{{ object.item.store.store_number}}</td>    
+              <td><button>Receive</button></td>    
             </tr>
             {% endfor %}
          </table>

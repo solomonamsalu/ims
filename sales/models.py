@@ -1,6 +1,5 @@
 
 from django.contrib import admin
-from core.models import Address
 from django.core.exceptions import ValidationError
 from django.db import models
 from inventory.models import Item, Store
@@ -8,6 +7,7 @@ from django.conf import settings
 from django.urls import reverse
 class Customer(models.Model):
 
+    store = models.ForeignKey(Store, on_delete=models.CASCADE)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     phone=models.CharField(max_length=20,unique=True)
     address=models.TextField()
@@ -22,6 +22,7 @@ class Customer(models.Model):
     @admin.display(ordering='user__last_name')
     def last_name(self):
         return self.user.last_name
+        
 class SalesOrder(models.Model):
     
     customer_name=models.ForeignKey(Customer,on_delete=models.CASCADE)

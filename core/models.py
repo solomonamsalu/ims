@@ -76,7 +76,7 @@ class User(AbstractUser):
     store = models.ForeignKey(Store, on_delete=models.CASCADE, null=True, blank=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True, related_name='workers')
     company_owner = models.BooleanField(default=False)
-    objects = CustomAccountManager()
+    # objects = CustomAccountManager()
 
     # def clean(self):
     #     store = self.cleaned_data.get('store')

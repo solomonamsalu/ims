@@ -8,6 +8,10 @@ from django.urls import reverse
 class PurchaseOrder(models.Model):
     # store = models.ForeignKey(Store, on_delete=models.CASCADE, null=True, blank=True)
     
+    STATUS_CHOICES =  [
+        ('TRANSIT', 'TRANSIT'),
+        ('RECEIVED', 'RECEIVED'),
+        ]
     supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE)
     deliver_to = models.TextField()
     purchase_order_number=models.CharField(max_length=100)
@@ -16,7 +20,7 @@ class PurchaseOrder(models.Model):
     quantity = models.IntegerField()
     rate = models.FloatField()
     amount = models.FloatField(null=True, blank=True)
-    received = models.BooleanField(default=False)
+    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default='TRANSIT')
     
     def save(self, *args, **kwargs):
         self.amount = self.quantity*self.rate
