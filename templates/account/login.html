@@ -32,9 +32,12 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 <p>{% blocktrans %}If you have not created an account yet, then please
 <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
 {% endif %}
-
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
+<head>
+  <link rel="stylesiheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<div class="text-center">
+<form class="login" method="POST" action="{% url 'account_login' %}" style="width:50%;margin-left:350px;">
+vi  {% csrf_token %}
   {%load crispy_forms_tags%}
   {%crispy form%}
   {% if redirect_field_value %}
@@ -43,5 +46,6 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
   <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
 </form>
+</div>
 
 {% endblock %}
