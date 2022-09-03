@@ -34,7 +34,7 @@ class CustomSignupForm(SignupForm):
 class CustomLoginForm(LoginForm):
     
     store_number = forms.CharField(max_length=100)
-    fields = ['user_name', 'store', 'password']
+    fields = ['user_name', 'store_number', 'password']
 
 
     def login(self, *args, **kwargs):

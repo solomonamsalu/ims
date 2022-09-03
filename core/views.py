@@ -119,7 +119,7 @@ class StoreListView(ListView):
             return 'object_list'
         return 'object'
     def get_template_names(self):
-        if self.request.user.company_owner:
+        if self.request.user.company_owner or self.request.user.store == None:
             return ['core/store_list.html',]
         return ['core/store_detail.html',]
         # return if self.requsuper().get_template_names()
