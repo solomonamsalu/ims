@@ -22,8 +22,11 @@ class ItemListView(ListView):
     
     def get_queryset(self):
             
-        if self.request.user.company_owner and self.request.user.company:                
-            return Item.objects.filter(store__company = self.request.user.company)
+        if self.request.user.company_owner:                
+            if self.request.user.company:
+                return Item.objects.filter(store__company = self.request.user.company)
+            else:
+                return Item.objects.none()
         elif self.request.user.store == None:
             return Item.objects.filter(store= self.request.user.store)
         return Item.objects.filter(store= self.request.user.store)
