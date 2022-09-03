@@ -7,21 +7,16 @@ from django.conf import settings
 from django.urls import reverse
 class Customer(models.Model):
 
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     phone=models.CharField(max_length=20,unique=True)
     address=models.TextField()
     
     def __str__(self) -> str:
-        return self.user.first_name +','+self.user.last_name
+        return self.first_name +','+self.last_name
     
-    @admin.display(ordering='user__first_name')
-    def first_name(self):
-        return self.user.first_name
-
-    @admin.display(ordering='user__last_name')
-    def last_name(self):
-        return self.user.last_name
+    
         
 class SalesOrder(models.Model):
     

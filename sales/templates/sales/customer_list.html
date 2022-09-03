@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %}
 {% block content %}
 <div class="container" >
-  <div class="jumbotron"> salesorders</div>
+  <div class="jumbotron"> customers</div>
 <table class="table table-bordered">
             <tr class="jumbotron">
               <th>sales_order_number</th>
@@ -11,15 +11,15 @@
         
             {% for object in object_list %}
             <tr>
-              <td><a href="{% url 'salesorder-detail' pk=object.id %}">{{ object.sales_order_number }}</a></td>
+              <td><a href="{% url 'customer-detail' pk=object.id %}">{{ object.sales_order_number }}</a></td>
               <td>{{ object.quantity}}</td>   
             </tr>
             {% endfor %}
          </table>
 
         <div class="container">
-            <a href="{% url 'salesorder-create' %}">
-              <button class="btn btn-outline-info">Add sales_order</button>
+            <a href="{% url 'customer-create' %}">
+              <button class="btn btn-outline-info">Add Customer</button>
             </a>
           </div>
     </div>

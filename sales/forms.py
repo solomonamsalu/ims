@@ -33,7 +33,8 @@ class AddCustomerForm(forms.ModelForm):
 
     class Meta:
         model=Customer
-        fields = [ 'user',  'phone', 'address']
+        # fields = '__all__'
+        fields = [ 'first_name', 'last_name', 'phone', 'address']
 
     def save(self, commit):
         return super().save(commit)
