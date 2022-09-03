@@ -29,7 +29,7 @@ class PurchaseReceiveListView(ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-class PurchaseOrderistView(ListView):
+class PurchaseOrderistView(View):
    
     # specify the model for list view
     model = PurchaseOrder
@@ -42,6 +42,33 @@ class PurchaseOrderistView(ListView):
             return PurchaseOrder.objects.filter(item__store__company= self.request.user.company)
         
         return PurchaseOrder.objects.filter(item__store = self.request.user.store)
+
+    form_class = AddPurchaseOrderForm
+    template_name = 'purchase/purchaseorder_list.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        
+        if self.request.user.company_owner:
+            purchase_orders =  PurchaseOrder.objects.filter(item__store__company= self.request.user.company)
+        
+        else:
+            purchase_orders = PurchaseOrder.objects.filter(item__store = self.request.user.store)
+        return render(request, self.template_name, {'object_list': purchase_orders})
+
+    def post(self, request, *args, **kwargs):
+        status = request.POST['status']
+        import json
+        res_dict_data = json.loads(status)['data']
+        purchase_order = PurchaseOrder.objects.get(id = res_dict_data[-1])
+        purchase_order.status = res_dict_data[0]
+        purchase_order.save()
+        if self.request.user.company_owner:
+            purchase_orders =  PurchaseOrder.objects.filter(item__store__company= self.request.user.company)
+        
+        else:
+            purchase_orders = PurchaseOrder.objects.filter(item__store = self.request.user.store)
+        return render(request, self.template_name, {'object_list': purchase_orders})
 
 class PurchaseOrderCreateView(FormView):
     model = PurchaseOrder

@@ -15,7 +15,26 @@
               <td><a href="{%url 'purchaseorder-detail' pk=object.id %}">{{ object.purchase_order_number }}</a></td>
               <td>{{ object.quantity}}</td>    
               <td>{{ object.item.store.store_number}}</td>    
-              <td><button>Receive</button></td>    
+              <td>
+                
+                <form method="POST" action="">
+                {% csrf_token %}
+                  <label for="status">change status:</label>
+                  <select name="status" id="status">
+                    {% if object.status == 'RECEIVED'%}
+                <option value="{'data':[RECEIVED, {{object.id}}]}">RECEIVED</option>
+                <option value='{"data":["TRANSIT", {{object.id}}]}''>TRANSIT</option>
+                    {%else%}
+                <option value='{"data":["TRANSIT", {{object.id}}]}''>TRANSIT</option>
+                <option value='{"data":["RECEIVED", {{object.id}}]}''>RECEIVED</option>
+                    {%endif%}
+                    
+                  </select>
+                  <br><br>
+                  <input type="submit" value="Submit">
+                </form>
+
+              </td>    
             </tr>
             {% endfor %}
          </table>
