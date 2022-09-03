@@ -4,13 +4,15 @@
   <div class="jumbotron">stores</div>
 <table class="table table-bordered">
             <tr>
-              <th class="jumbotron">store_number/company</th>
+              <th class="jumbotron">store_number</th>
+              <th class="jumbotron">company</th>
               
             </tr>
         
             {% for object in object_list %}
             <tr>
-              <td><a href="{%url 'store-detail' pk=object.id %}">{{ object.store_number}}/{{object.company}}</a></td>              
+              <td><a href="{%url 'store-detail' pk=object.id %}">{{ object.store_number}}</a></td>   
+              <td>{{object.company}}</td>           
             </tr>
             {% endfor %}
          </table>
