@@ -23,9 +23,9 @@ class PurchaseReceiveListView(ListView):
     
     def get_queryset(self):
         if self.request.user.company_owner:
-            return PurchaseOrder.objects.filter(item__store__company= self.request.user.company, received = True)
+            return PurchaseOrder.objects.filter(item__store__company= self.request.user.company, status = 'RECEIVED')
         
-        return PurchaseOrder.objects.filter(item__store = self.request.user.store, received = True)
+        return PurchaseOrder.objects.filter(item__store = self.request.user.store,  status = 'RECEIVED')
 
 
 @method_decorator(login_required, name='dispatch')
