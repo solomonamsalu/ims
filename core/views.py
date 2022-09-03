@@ -76,10 +76,8 @@ class StoreCreateView(CreateView):
     form_class = AddStoreForm
     template_name = 'core/store_create.html'
 
-    
     def post(self,request, *args, **kwargs):
-
-        form = self.form_class(request.POST)
+        form = self.form_class(self.request.POST)
         if form.is_valid():
             # store_number = f.store_number
             obj = form.save(commit=False)
@@ -91,9 +89,9 @@ class StoreCreateView(CreateView):
                 obj.delete()
             success_url = reverse('store-detail', kwargs={'pk': obj.id})
             return HttpResponseRedirect(success_url)
-        # self.get_object()   
+            
         return self.form_invalid(form)
-    
+
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
