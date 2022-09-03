@@ -19,7 +19,7 @@
                 
                 <form method="POST" action="">
                 {% csrf_token %}
-                  <label for="status">change status:</label>
+                  <label for="status">Status:</label>
                   <select name="status" id="status">
                     {% if object.status == 'RECEIVED'%}
                 <option value="{'data':[RECEIVED, {{object.id}}]}">RECEIVED</option>
