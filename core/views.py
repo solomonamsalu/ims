@@ -14,7 +14,7 @@ from core.models import Company, Store
 @login_required(login_url="/accounts/login/")
 def home(request):
 
-    return render(request, 'layouts/base.html')
+    return render(request, 'home/index.html')
 
 @method_decorator(login_required, name='dispatch')
 def profile(request):
