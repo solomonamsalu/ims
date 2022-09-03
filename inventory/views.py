@@ -39,10 +39,7 @@ class ItemCreateView(CreateView):
     def post(self,request, *args, **kwargs):
         form = self.form_class(self.request.POST)
         if form.is_valid():
-            # if self.request.user.company_owner:
-            #     return HttpResponse("You can't create an item.")
             obj = form.save(commit=False)
-            obj.store = self.request.user.store
             obj.save()
             success_url = reverse('item-detail', kwargs={'pk': obj.id})
             return HttpResponseRedirect(success_url)
