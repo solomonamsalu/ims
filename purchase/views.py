@@ -59,9 +59,9 @@ class PurchaseOrderistView(View):
     def post(self, request, *args, **kwargs):
         status = request.POST['status']
         import json
-        res_dict_data = json.loads(status)['data']
-        purchase_order = PurchaseOrder.objects.get(id = res_dict_data[-1])
-        purchase_order.status = res_dict_data[0]
+        data = json.loads(status)['data']
+        purchase_order = PurchaseOrder.objects.get(id = data[-1])
+        purchase_order.status = data[0]
         purchase_order.save()
         if self.request.user.company_owner:
             purchase_orders =  PurchaseOrder.objects.filter(item__store__company= self.request.user.company)
