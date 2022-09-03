@@ -16,9 +16,12 @@ class AddItemForm(forms.ModelForm):
         try:
             if user.company_owner:
                     self.fields['store'].queryset = user.company.store_set
+                    self.fields['Preferred_supplier'].queryset = Supplier.objects.filter(company=user.company)
+
             else:
                 self.fields['store'].initial = user.store
                 self.fields['store'].queryset = Store.objects.filter(id=user.store.id)
+                self.fields['Preferred_supplier'].queryset = Supplier.objects.filter(company=user.company)
         except:
             pass
     class Meta:
