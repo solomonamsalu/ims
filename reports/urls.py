@@ -19,6 +19,8 @@ from django.urls import path, include
 from reports import views
 
 urlpatterns = [
-  path('sales/', views.ListSalesReportView.as_view(), name='sales-report')  
+  path('sales/', views.ListSalesReportView.as_view(), name='sales-report'),
+  path('purchase/', views.ListPurchaseReportView.as_view(), name='purchase-report'),
+  path('items/', views.ListItemReportView.as_view(), name='item-report'),
 
 ]

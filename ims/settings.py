@@ -44,7 +44,6 @@ INSTALLED_APPS = [
    'core',
    'reports',
    
-
 ]
 
 MIDDLEWARE = [
