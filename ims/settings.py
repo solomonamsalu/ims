@@ -42,6 +42,7 @@ INSTALLED_APPS = [
    'purchase',
    'report',
    'core',
+   'reports',
    
 
 ]

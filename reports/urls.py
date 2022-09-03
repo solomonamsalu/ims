@@ -1,3 +1,5 @@
+
+
 """ims URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -13,21 +15,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path, include
-from core import views
-from allauth.account import urls
+from reports import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('inventory/', include('inventory.urls')),
-    path('core/', include('core.urls')),
-    path('reports/', include('reports.urls')),
-    path('', views.home),
-    path('profile', views.profile, name='profile'),
-    path('accounts/', include('allauth.urls')),
-
-    path('purchase/', include('purchase.urls')),
-    path('sales/',include('sales.urls')),
+  path('sales/', views.ListSalesReportView.as_view(), name='sales-report')  
 
 ]
