@@ -15,7 +15,9 @@ class Customer(models.Model):
     
     def __str__(self) -> str:
         return self.first_name +','+self.last_name
-    
+    def get_absolute_url(self):
+        return reverse('customer-detail', kwargs={'pk': self.pk})
+
     
         
 class SalesOrder(models.Model):
