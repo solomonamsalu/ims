@@ -42,15 +42,11 @@ class AddSupplierForm(forms.ModelForm):
             pass
         super(AddSupplierForm, self).__init__(*args, **kwargs)
         try:
-            if user.company_owner:
-                    self.fields['store'].queryset = user.company.store_set
-            else:
-                self.fields['store'].initial = user.store
-                self.fields['store'].queryset = Store.objects.filter(id=user.store.id)
+           pass
         except:
             pass
     class Meta:
         model=Supplier
-        fields = ['first_name', 'last_name', 'company_name',  'email', 'phone', 'address']
+        fields = ['first_name', 'last_name',   'email', 'phone', 'address']
 
     

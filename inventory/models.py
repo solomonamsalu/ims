@@ -9,7 +9,6 @@ class Supplier(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
     first_name=models.CharField(max_length=200)
     last_name=models.CharField(max_length=200)
-    company_name=models.CharField(max_length=200)
     email=models.EmailField(max_length=200,unique=True)
     phone=models.CharField(max_length=20,unique=True)
     address=models.TextField()

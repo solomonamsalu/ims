@@ -82,10 +82,22 @@ class SupplierListView(ListView):
 
 class SupplierCreateView(CreateView):
     model = Supplier
-    fields = '__all__'
+    # fields = ['first_name', 'last_name',  'email', 'phone', 'address']
     template_name = 'inventory/supplier_create.html'
+    form_class = AddSupplierForm
+    
+    def post(self,request, *args, **kwargs):
+        form = self.get_form_class()(self.request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.company = request.user.company
+            obj.save()
+            success_url = reverse('supplier-detail', kwargs={'pk': obj.id})
+            return HttpResponseRedirect(success_url)
+            
+        return super().post(request, *args, **kwargs)
 
-   
+
 class SupplierDetailView(DeleteView):
       model = Supplier
       template_name = 'inventory/supplier_detail.html'
