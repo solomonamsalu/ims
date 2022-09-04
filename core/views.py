@@ -3,18 +3,28 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
+from django.views import View
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
+from requests import request
 from inventory.models import Item
 
 from core.forms import AddStoreForm
 from core.models import Company, Store
+from django.db.models import F
 
 
 @login_required(login_url="/accounts/login/")
 def home(request):
 
-    return render(request, 'home/index.html')
+    if request.method == 'GET':
+        low_stock_items = Item.objects.filter(on_hand_stock = F('reorder_point')).count()
+        all_items = Item.objects.all().count()
+        context = {
+            'low_stock_items': low_stock_items,
+            'all_items': all_items,
+        }
+        return render(request, 'home/index.html', context=context)
 
 @method_decorator(login_required, name='dispatch')
 def profile(request):

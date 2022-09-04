@@ -23,7 +23,7 @@ urlpatterns = [
     path('inventory/', include('inventory.urls')),
     path('core/', include('core.urls')),
     path('reports/', include('reports.urls')),
-    path('', views.home),
+    path('', views.home, name='home'),
     path('profile', views.profile, name='profile'),
     path('accounts/', include('allauth.urls')),
 
