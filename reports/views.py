@@ -18,9 +18,19 @@ class ListSalesByItemReportView(ListView):
 
     template_name = 'reports/sales_by_item_list.html'
     def get_queryset(self):
-        sales_by_customer = SalesOrder.objects.values('item__name').annotate(total_inventory=Sum('quantity'), total_price = Sum('amount'))
+        sales_by_customer = SalesOrder.objects.values('item__name', 'item__SKU_number').annotate(total_inventory=Sum('quantity'), total_price = Sum('amount'))
         object_list = sales_by_customer
         return object_list
+
+class InventorySummaryReportView(ListView):
+
+    template_name = 'reports/inventory_summary.html'
+    def get_queryset(self):
+        sales_by_customer = Item.objects.all()
+        object_list = sales_by_customer
+        return object_list
+
+
 class ListPurchaseReportView(ListView):
 
     template_name = 'reports/purchase_list.html'
