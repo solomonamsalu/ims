@@ -83,9 +83,16 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link {% if 'map' in segment %} active {% endif %}" href="{% url 'sales-report' %}">
+              <a class="nav-link {% if 'map' in segment %} active {% endif %}" href="{% url 'sales_by_customer-report' %}">
                 <i class="ni ni-pin-3 text-primary"></i>
-                <span class="nav-link-text">Sales </span>
+                <span class="nav-link-text">Sales By Customer </span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link {% if 'map' in segment %} active {% endif %}" href="{% url 'sales_by_item-report' %}">
+                <i class="ni ni-pin-3 text-primary"></i>
+                <span class="nav-link-text">Sales By Item </span>
               </a>
             </li>
 

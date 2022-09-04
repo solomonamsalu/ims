@@ -4,15 +4,17 @@
   <div class="jumbotron"> customers</div>
 <table class="table table-bordered">
             <tr class="jumbotron">
-              <th>sales_order_number</th>
-              <th>quantity</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Story</th>
               
             </tr>
         
             {% for object in object_list %}
             <tr>
-              <td><a href="{% url 'customer-detail' pk=object.id %}">{{ object.sales_order_number }}</a></td>
-              <td>{{ object.quantity}}</td>   
+              <td><a href="{% url 'customer-detail' pk=object.id %}">{{ object.first_name }}</a></td>
+              <td>{{ object.last_name}}</td>   
+              <td>{{ object.store}}</td>   
             </tr>
             {% endfor %}
          </table>

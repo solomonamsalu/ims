@@ -73,25 +73,24 @@ class CustomerListView(ListView):
     
     def get_queryset(self):
         if self.request.user.company_owner:
-            return Customer.objects.filter(store= self.request.user.store)
+            return Customer.objects.filter(store__company= self.request.user.company)
         
-        return Customer.objects.filter()
+        return Customer.objects.filter(store = self.request.user.store)
 
 class CustomerCreateView(CreateView):
     model = Customer
     template_name = 'sales/customer_create.html'
     form_class = AddCustomerForm
 
-    # def get_form_kwargs(self):
-    #     kwargs = super().get_form_kwargs()
-    #     kwargs['user'] = self.request.user
-    #     return kwargs
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
         
     def post(self,request, *args, **kwargs):
         form = self.form_class(self.request.POST)
         if form.is_valid():
             obj = form.save(commit=False)
-            obj.store = self.request.user.store
             obj.save()
             success_url = reverse('customer-detail', kwargs={'pk': obj.id})
             return HttpResponseRedirect(success_url)
@@ -100,7 +99,7 @@ class CustomerCreateView(CreateView):
            
 class CustomerDetailView(DetailView):
       model = Customer
-      template_name = 'customer_detail.html'
+      template_name = 'sales/customer_detail.html'
 
 class CustomerUpdateView(UpdateView):
     model = Customer
