@@ -44,7 +44,7 @@ class ItemCreateView(CreateView):
             success_url = reverse('item-detail', kwargs={'pk': obj.id})
             return HttpResponseRedirect(success_url)
             
-        return self.form_invalid(form)
+        return super().post(request, *args, **kwargs)
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -129,7 +129,7 @@ class SupplierDeleteView(DeleteView):
 #             success_url = reverse('supplier-detail', kwargs={'pk': obj.id})
 #             return HttpResponseRedirect(success_url)
             
-#         return self.form_invalid(form)
+#         return super().post(request, *args, **kwargs)
 
 #     def get_form_kwargs(self):
 #         kwargs = super().get_form_kwargs()
