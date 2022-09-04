@@ -41,14 +41,14 @@ class SalesOrderCreateView(CreateView):
             obj = form.save(commit=False)
             obj.store = self.request.user.store
             obj.save()
-            success_url = reverse('sales/sales_order-detail', kwargs={'pk': obj.id})
+            success_url = reverse('salesorder-detail', kwargs={'pk': obj.id})
             return HttpResponseRedirect(success_url)
             
         return super().post(request, *args, **kwargs)
            
 class SalesOrderDetailView(DetailView):
       model = SalesOrder
-      template_name = 'sales/sales_order_detail.html'
+      template_name = 'sales/salesorder_detail.html'
 
 class SalesOrderUpdateView(UpdateView):
     model = SalesOrder
