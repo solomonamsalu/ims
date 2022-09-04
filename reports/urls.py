@@ -21,7 +21,7 @@ from reports import views
 urlpatterns = [
   path('sales/by_customer/', views.ListSalesByCustomerReportView.as_view(), name='sales_by_customer-report'),
   path('sales/by_item/', views.ListSalesByItemReportView.as_view(), name='sales_by_item-report'),
-  path('sales/by_item/', views.ListPurchaseByItemReportView.as_view(), name='purchase_by_item-report'),
+  path('purchase/by_item/', views.ListPurchaseByItemReportView.as_view(), name='purchase_by_item-report'),
   path('inventory_summary/', views.InventorySummaryReportView.as_view(), name='inventory_summary-report'),
   path('purchase/', views.ListPurchaseReportView.as_view(), name='purchase-report'),
   path('items/', views.ListItemReportView.as_view(), name='item-report'),
