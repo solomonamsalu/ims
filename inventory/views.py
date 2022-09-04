@@ -70,7 +70,7 @@ class SupplierListView(ListView):
    
     # specify the model for list view
     model = Supplier
-    # template_name = 'inventory/supplier_list.html'
+    template_name = 'inventory/supplier_list.html'
     # context_object_name = 'object_list'
     def get_queryset(self):
             
