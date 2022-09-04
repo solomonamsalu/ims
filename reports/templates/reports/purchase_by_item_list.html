@@ -1,0 +1,26 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<div class="container" >
+  <div class="jumbotron"> customers</div>
+<table class="table table-bordered">
+            <tr class="jumbotron">
+              <th>Item Name</th>
+              <th>SKU</th>
+              <th>Total Enventory</th>
+              <th>Total Cost</th>
+              
+            </tr>
+        
+            {% for object in object_list %}
+            <tr>
+              <td>{{ object.item__name}} </td>   
+              <td>{{ object.item__SKU_number}} </td>   
+              <td>{{ object.total_inventory}}</td>   
+              <td>{{ object.total_price}}</td>   
+            </tr>
+            {% endfor %}
+         </table>
+
+    </div>
+    {% endblock content %}
+  
