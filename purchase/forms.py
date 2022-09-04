@@ -20,6 +20,7 @@ class AddPurchaseOrderForm(forms.ModelForm):
                 self.fields['supplier'].queryset = Supplier.objects.filter(company=user.company)
                 self.fields['item'].queryset = Item.objects.filter(store__company=user.company)
             else:
+                self.fields['supplier'].queryset = Supplier.objects.filter(company=user.company)
                 self.fields['item'].queryset = Item.objects.filter(store=user.store)
                 self.fields['deliver_to'].initial = user.store.address
         except:
