@@ -1,4 +1,6 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import F
+from django.db.models.aggregates import Sum
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -6,12 +8,12 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
-from requests import request
 from inventory.models import Item
+from requests import request
 
 from core.forms import AddStoreForm
 from core.models import Company, Store
-from django.db.models import F
+from purchase.models import PurchaseOrder
 
 
 @login_required(login_url="/accounts/login/")
@@ -21,12 +23,18 @@ def home(request):
         if request.user.company_owner:
             low_stock_items = Item.objects.filter(store__company=request.user.company).filter(on_hand_stock = F('reorder_point')).count()
             all_items = Item.objects.filter(store__company=request.user.company).count()
+            quantity_in_hand = Item.objects.filter(store__company=request.user.company).aggregate(quantity_in_hand=Sum('on_hand_stock'))
+            quantity_to_be_received = PurchaseOrder.objects.filter(item__store__company=request.user.company, status = 'TRANSIT').aggregate(quantity_to_be_received = Sum('quantity'))
         else:
             low_stock_items = Item.objects.filter(store=request.user.store).filter(on_hand_stock = F('reorder_point')).count()
             all_items = Item.objects.filter(store=request.user.store).count()
+            quantity_in_hand = Item.objects.filter(store=request.user.store).aggregate(quantity_in_hand=Sum('on_hand_stock'))
+            quantity_to_be_received =PurchaseOrder.objects.filter(item__store = request.user.store, status = 'TRANSIT').aggregate(quantity_to_be_received = Sum('quantity'))
         context = {
             'low_stock_items': low_stock_items,
             'all_items': all_items,
+            'quantity_in_hand': quantity_in_hand,
+            'quantity_to_be_received': quantity_to_be_received
         }
         return render(request, 'home/index.html', context=context)
 
