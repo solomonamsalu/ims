@@ -18,10 +18,10 @@ class AddSalesOrderForm(forms.ModelForm):
         super(AddSalesOrderForm, self).__init__(*args, **kwargs)
         if user.company_owner:
             self.fields['item'].queryset = Item.objects.filter(store__company=user.company)
-            self.fields['item'].queryset = Item.objects.filter(store__company=user.company)
+            self.fields['customer'].queryset = Customer.objects.filter(store__company=user.company)
         else:
             self.fields['item'].queryset = Item.objects.filter(store=user.store)
-            self.fields['item'].queryset = Item.objects.filter(store=user.store)
+            self.fields['customer'].queryset = Customer.objects.filter(store=user.store)
 
     class Meta:
         model=SalesOrder
