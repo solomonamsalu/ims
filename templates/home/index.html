@@ -1,21 +1,25 @@
-{% extends 'layouts/base.html' %}
+{% extends "layouts/base.html" %}
 
-{% block content %}
 
-<table class="table table-bordered">
-  <tr class="jumbotron">
-    <th>Low Stock Items</th>
-    <th>All Items</th>
-    <th>address</th>
+    {% block content %}
+        <div class="container">
+        
+          <table width = "50%">
+            <tr>
+            <th>All Items</th>
+            <td>{{all_items}}</td>
+          </tr>
+            <tr>
+              <th>Low Stock Items</th>
+              <td>{{low_stock_items}}</td>
+            </tr>
+            
+          </table>
+
+          <a href="#">News <span class="badge">5</span></a><br>
+<a href="#">Comments <span class="badge">10</span></a><br>
+<a href="#">Updates <span class="badge">2</span></a>
+    {% endblock content %}
+
+
     
-  </tr>
-
-  <tr>
-    <td>low_stock_items</td>
-    <td><all_items/td>
-    <td></td>                   
-  </tr>
-</table>
-
-{% endblock content %}
-
