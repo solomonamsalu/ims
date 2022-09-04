@@ -18,8 +18,12 @@ from django.db.models import F
 def home(request):
 
     if request.method == 'GET':
-        low_stock_items = Item.objects.filter(on_hand_stock = F('reorder_point')).count()
-        all_items = Item.objects.all().count()
+        if request.user.company_owner:
+            low_stock_items = Item.objects.filter(store__company=request.user.company).filter(on_hand_stock = F('reorder_point')).count()
+            all_items = Item.objects.filter(store__company=request.user.company).count()
+        else:
+            low_stock_items = Item.objects.filter(store=request.user.store).filter(on_hand_stock = F('reorder_point')).count()
+            all_items = Item.objects.filter(store=request.user.store).count()
         context = {
             'low_stock_items': low_stock_items,
             'all_items': all_items,
