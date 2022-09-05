@@ -34,9 +34,16 @@ class InventorySummaryReportView(ListView):
     def get_queryset(self):
         newest_purchases = PurchaseOrder.objects.filter(item=OuterRef('pk')).order_by('-date')
         newest_sales = SalesOrder.objects.filter(item=OuterRef('pk')).order_by('-date')
-        sales_by_customer = Item.objects.filter().annotate(quantity_in= Subquery(newest_purchases.values('quantity')),\
+        if self.request.user.company_owner:
+            
+            sales_by_customer = Item.objects.filter(store__company = self.request.user.company).annotate(quantity_in= Subquery(newest_purchases.values('quantity')),\
                                                             quantity_out= Subquery(newest_sales.values('quantity'))) # TODO finish this.
-            # .order_by('date').first().quantity), quantity_out = Sum('rate'))
+        else:
+            try:
+                sales_by_customer = Item.objects.filter(store = self.request.user.store).annotate(quantity_in= Subquery(newest_purchases.values('quantity')),\
+                                                            quantity_out= Subquery(newest_sales.values('quantity'))) # TODO finish this.
+            except:
+                sales_by_customer = Item.objects.none()
         object_list = sales_by_customer
         return object_list
     # def get_context_data(self, **kwargs):
