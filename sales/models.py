@@ -25,7 +25,7 @@ class SalesOrder(models.Model):
     customer=models.ForeignKey(Customer,on_delete=models.CASCADE)
     sales_order_number=models.CharField(max_length=100)
     sales_order_date=models.DateTimeField(auto_now_add=True)
-    item=models.ForeignKey(Item, on_delete= models.CASCADE)
+    item=models.ForeignKey(Item, on_delete= models.CASCADE, related_name='sales_orders')
     quantity = models.IntegerField()
     rate = models.FloatField()
     amount = models.FloatField(null=True, blank=True)

@@ -9,17 +9,15 @@
               <th>QUANTITY IN </th>
               <th>QUANTITY OUT</th>
               <th>STOCK ON HAND</th>
-              <th>AVAILABLE FOR SALE</th>
-              
             </tr>
         
             {% for object in object_list %}
+            purchase_orders = PurchseOrder.objects.filter
             <tr>
               <td>{{ object.name}} </td>   
               <td>{{ object.SKU_number}} </td>   
-              <td>{{ object.total_inventory}}</td>   
-              <td>{{ object.total_price}}</td>   
-              <td>{{ object.on_hand_stock}}</td>   
+              <td>{{x}}</td>   
+              <td>{{ y}}</td>   
               <td>{{ object.on_hand_stock}}</td>   
             </tr>
             {% endfor %}

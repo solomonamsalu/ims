@@ -16,7 +16,7 @@ class PurchaseOrder(models.Model):
     deliver_to = models.TextField()
     purchase_order_number=models.CharField(max_length=100)
     date=models.DateField(auto_now_add=True)
-    item=models.ForeignKey(Item, on_delete= models.CASCADE)
+    item=models.ForeignKey(Item, on_delete= models.CASCADE, related_name='purchase_orders')
     quantity = models.IntegerField()
     rate = models.FloatField()
     amount = models.FloatField(null=True, blank=True)
