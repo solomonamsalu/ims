@@ -32,8 +32,10 @@ class InventorySummaryReportView(ListView):
 
     template_name = 'reports/inventory_summary.html'
     def get_queryset(self):
-        newest = PurchaseOrder.objects.filter(item=OuterRef('pk')).order_by('-date')
-        sales_by_customer = Item.objects.filter().annotate(quantity_in= Subquery(newest.values('quantity'))) # todo finish this.
+        newest_purchases = PurchaseOrder.objects.filter(item=OuterRef('pk')).order_by('-date')
+        newest_sales = SalesOrder.objects.filter(item=OuterRef('pk')).order_by('-date')
+        sales_by_customer = Item.objects.filter().annotate(quantity_in= Subquery(newest_purchases.values('quantity')),\
+                                                            quantity_out= Subquery(newest_sales.values('quantity'))) # TODO finish this.
             # .order_by('date').first().quantity), quantity_out = Sum('rate'))
         object_list = sales_by_customer
         return object_list

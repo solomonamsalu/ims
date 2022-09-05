@@ -5,6 +5,7 @@ from django.db import models
 from inventory.models import Item, Store
 from django.conf import settings
 from django.urls import reverse
+from django.utils import timezone
 class Customer(models.Model):
 
     first_name = models.CharField(max_length=100)
@@ -29,7 +30,7 @@ class SalesOrder(models.Model):
     quantity = models.IntegerField()
     rate = models.FloatField()
     amount = models.FloatField(null=True, blank=True)
-    
+    date=models.DateField(default=timezone.now)
     def save(self, *args, **kwargs):
         self.amount = self.quantity*self.rate
         return super().save(*args, **kwargs)
