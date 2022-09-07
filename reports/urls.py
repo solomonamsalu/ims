@@ -23,7 +23,6 @@ urlpatterns = [
   path('sales/by_item/', views.ListSalesByItemReportView.as_view(), name='sales_by_item-report'),
   path('purchase/by_item/', views.ListPurchaseByItemReportView.as_view(), name='purchase_by_item-report'),
   path('inventory_summary/', views.InventorySummaryReportView.as_view(), name='inventory_summary-report'),
-  path('purchase/', views.ListPurchaseReportView.as_view(), name='purchase-report'),
-  path('items/', views.ListItemReportView.as_view(), name='item-report'),
+  path('product_sales_order/', views.ProductSalesOrderView.as_view(), name='product_sales_order-report'),
 
 ]

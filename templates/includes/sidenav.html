@@ -104,18 +104,12 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link {% if 'map' in segment %} active {% endif %}" href="{% url 'purchase-report' %}">
+              <a class="nav-link {% if 'map' in segment %} active {% endif %}" href="{% url 'product_sales_order-report' %}">
                 <i class="ni ni-pin-3 text-primary"></i>
-                <span class="nav-link-text">Purchases</span>
+                <span class="nav-link-text">product sales order</span>
               </a>
             </li>
 
-            <li class="nav-item">
-              <a class="nav-link {% if 'map' in segment %} active {% endif %}" href="{% url 'item-report' %}">
-                <i class="ni ni-pin-3 text-primary"></i>
-                <span class="nav-link-text">Items </span>
-              </a>
-            </li>
 
             <li class="nav-item">
               <a class="nav-link {% if 'map' in segment %} active {% endif %}" href="{% url 'purchase_by_item-report' %}">

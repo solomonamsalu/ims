@@ -54,16 +54,11 @@ class InventorySummaryReportView(ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ListPurchaseReportView(ListView):
+class ProductSalesOrderView(ListView):
 
-    template_name = 'reports/purchase_list.html'
+    template_name = 'reports/product_sales_order.html'
     queryset = PurchaseOrder.objects.all()
 
-@method_decorator(login_required, name='dispatch')
-class ListItemReportView(ListView):
-
-    template_name = 'reports/item_list.html'
-    queryset = Item.objects.all()
 
 @method_decorator(login_required, name='dispatch')
 class ListPurchaseByItemReportView(ListView):
