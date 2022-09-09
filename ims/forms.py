@@ -33,7 +33,7 @@ class CustomSignupForm(SignupForm):
 
 class CustomLoginForm(LoginForm):
     
-    store_number = forms.CharField(max_length=100)
+    store_number = forms.CharField(max_length=100, initial="Skip if you are a company user.")
     fields = ['user_name', 'store_number', 'password']
 
 
