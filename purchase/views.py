@@ -62,12 +62,14 @@ class PurchaseOrderListView(View):
         import json
         data = json.loads(status)['data']
         purchase_order = PurchaseOrder.objects.get(id = data[-1])
-        purchase_order.status = data[0]
-        purchase_order.save()
-        # change on hand stock of item.
-        item = purchase_order.item
-        item.on_hand_stock += purchase_order.quantity
-        item.save()
+        status = data[0]
+        if status == 'RECEIVED' and purchase_order.status == 'TRANSIT':
+            purchase_order.status = data[0]
+            purchase_order.save()
+            # change on hand stock of item.
+            item = purchase_order.item
+            item.on_hand_stock += purchase_order.quantity
+            item.save()
         if self.request.user.company_owner:
             purchase_orders =  PurchaseOrder.objects.filter(item__store__company= self.request.user.company)
         
