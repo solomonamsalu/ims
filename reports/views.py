@@ -7,6 +7,7 @@ from django.views.generic import ListView
 from inventory.models import Item
 from purchase.models import PurchaseOrder
 from sales.models import SalesOrder
+from django.db.models import F, Func
 
 
 # Create your views here.
@@ -57,14 +58,31 @@ class InventorySummaryReportView(ListView):
 class ProductSalesOrderView(ListView):
 
     template_name = 'reports/product_sales_order.html'
-    queryset = PurchaseOrder.objects.all()
+    queryset = Item.objects.all()
+    def get_queryset(self):
+        if self.request.user.company_owner:
+            sales_orders = SalesOrder.objects.filter(item=OuterRef('pk')).order_by().values('quantity').annotate(sum=Func(F('id'), function='Sum')).values('sum')
+            # sales_price = SalesOrder.objects.filter(item=OuterRef('pk')).order_by().annotate(count=Func(F('id'), function='Count')).values('count')
+            sales_by_item = Item.objects.filter(store__company = self.request.user.company).annotate(quantity_sold=Subquery(sales_orders))
+        else:
+            sales_orders = SalesOrder.objects.filter(item=OuterRef('pk')).order_by().annotate(count=Func(F('id'), function='Count')).values('count')
+            sales_by_item = Item.objects.filter(store = self.request.user.store).annotate(quantity_sold=Subquery(sales_orders))
 
+        
+        object_list = sales_by_item
+        return object_list
 
 @method_decorator(login_required, name='dispatch')
 class ListPurchaseByItemReportView(ListView):
 
     template_name = 'reports/purchase_by_item_list.html'
     def get_queryset(self):
-        purchase_by_item = PurchaseOrder.objects.values('item__name', 'item__SKU_number').annotate(total_inventory=Sum('quantity'), total_price = Sum('amount'))
+
+        if self.request.user.company_owner:
+
+            purchase_by_item = PurchaseOrder.objects.filter(item__store__company = self.request.user.company).values('item__name', 'item__SKU_number').annotate(total_inventory=Sum('quantity'), total_price = Sum('amount'))
+        else:
+            purchase_by_item = PurchaseOrder.objects.filter(item__store = self.request.user.store).values('item__name', 'item__SKU_number').annotate(total_inventory=Sum('quantity'), total_price = Sum('amount'))
+        
         object_list = purchase_by_item
         return object_list

@@ -6,15 +6,19 @@
   <div class="jumbotron"> salesorders</div>
 <table class="table table-bordered">
             <tr class="jumbotron">
-              <th>sales_order_number</th>
-              <th>quantity</th>
+              <th>ITEM NAME</th>
+              <th>SKU</th>
+              <th>QTY SOLD</th>
+              <th>SALES PRICE</th>
               
             </tr>
         
             {% for object in object_list %}
             <tr>
-              <td><a href="{% url 'salesorder-detail' pk=object.id %}">{{ object.sales_order_number }}</a></td>
-              <td>{{ object.quantity}}</td>   
+              <td>{{ object.name }}</td>
+              <td>{{ object.SKU_number}}</td>   
+              <td>{{ object.quantity_sold}}</td>   
+              <td>{{ object.sales_price}}</td>   
             </tr>
             {% endfor %}
          </table>
