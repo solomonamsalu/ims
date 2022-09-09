@@ -6,6 +6,7 @@
             <tr>
               <th class="jumbotron">store_number</th>
               <th class="jumbotron">company</th>
+              <th class="jumbotron">supplier</th>
               
             </tr>
         
@@ -13,6 +14,13 @@
             <tr>
               <td><a href="{%url 'store-detail' pk=object.id %}">{{ object.store_number}}</a></td>   
               <td>{{object.company}}</td>           
+              <td>
+                {%for supplier in object.company.suppliers.all%}
+
+                {{supplier.first_name}}  {{supplier.last_name}}, 
+            {% endfor %}
+
+              </td>           
             </tr>
             {% endfor %}
          </table>
