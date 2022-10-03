@@ -1,5 +1,3 @@
-from tkinter import CASCADE
-
 from core.models import Company, Store
 from django.db import models
 from django.urls import reverse
